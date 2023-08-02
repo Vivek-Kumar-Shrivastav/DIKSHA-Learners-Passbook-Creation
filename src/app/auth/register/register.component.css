@@ -1,0 +1,46 @@
+form{
+    /* display: flex; flex-direction: column;align-items: center; justify-content: center; */
+    width: 25vw; 
+    /* height: 50vh;  */
+    border: 2px soild red;
+    background: rgb(227, 236, 241);
+    border-radius: 5px;
+    margin:auto;
+    margin-top: 20vh;
+    padding: 20px;
+}
+h2{
+    text-align: center;
+}
+label{
+    display: block;
+    padding: 10px;
+    
+}
+input{
+    box-sizing: border-box;
+    /* text-emphasis: ; */
+    font-size: 1rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(166, 166, 176);
+    /* margin-bottom: 15px; */
+}
+
+input:focus{
+    outline: none !important;
+    border: 2px solid blueviolet;
+}
+button{
+    background-color: rgb(103, 103, 235);
+    padding: 10px;
+    color: white;
+    font-size: 1rem;
+    width: 100%;
+    margin:auto;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+
+}

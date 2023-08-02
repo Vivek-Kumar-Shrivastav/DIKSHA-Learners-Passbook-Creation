@@ -1,0 +1,50 @@
+<form #forms="ngForm" (ngSubmit)="signIn(forms)">
+  <h2>Sign In</h2>
+  <label for="emailId">Email</label>
+  <input
+    type="text"
+    name="emailId"
+    id="emailId"
+    [(ngModel)] = "emailId"
+    placeholder="Enter your emailId"
+    #email="ngModel"
+    ngModel
+    pattern="^[a-zA-Z0-9.!#$%&'*+/\=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+    required
+  />
+  <ng-container *ngIf="email.errors && email.touched">
+    <div *ngIf="email.errors['required']">Enter your Email</div>
+    <div *ngIf="email.errors?.['pattern']">Enter valid email</div>
+  </ng-container>
+  <!-- <span>{{ email.value }}</span> -->
+  <label for="pass">Password</label>
+  <input
+    type="password"
+    name="password"
+    id="pass"
+    [(ngModel)] = "password"
+    #passwordInput="ngModel"
+    ngModel
+    minlength="6"
+    required
+  />
+  <!-- <span>{{passwordInput.value}}</span> -->
+  <div *ngIf="passwordInput.errors && passwordInput.touched">
+        <div *ngIf= "passwordInput.errors['required']">
+            Password is Required.
+        </div>
+        <div *ngIf= "passwordInput.value.length < 6   &&   passwordInput.value.length >0   ">
+            Password must be at least 6 characters long.
+        </div>
+     
+ </div>
+  
+  <!-- <small>{{ passwordInput.errors?.['minlength']?.value}}</small> -->
+  <button
+    class="submit-btn"
+    type="submit"
+    [disabled]="forms.errors || forms.invalid"
+  >
+    Submit
+  </button>
+</form>

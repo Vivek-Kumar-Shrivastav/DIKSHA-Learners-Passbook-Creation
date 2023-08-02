@@ -1,0 +1,110 @@
+<!-- <p>dlp works!</p> -->
+
+<div id="dlp">
+  <div id="user-detail" class="m-3">
+    <div id="user-profile">
+      <img
+        id="user-profile-image"
+        src="assets/images/tri-color-bg.png"
+        alt="{{ name }}"
+      />
+    </div>
+    <div id="user-credentials" class="m-2">
+      <p><span>Name</span>{{ name | titlecase }}</p>
+      <p><span>DoB</span>{{ dateOfBirth | titlecase }}</p>
+      <p><span>Age</span>{{ age | titlecase }}</p>
+      <p><span>Gender</span>{{ gender | titlecase }}</p>
+      <p *ngIf="aadhar != ''"><span>Aadhar</span>{{ aadhar | titlecase }}</p>
+    </div>
+    <div>
+      <img
+        id="qr-image"
+        src="https://www.kindpng.com/picc/m/120-1202089_qr-code-transparent-png-qr-code-png-png.png"
+        alt="Qr Code Transparent Png - Qr Code Png, Png Download@kindpng.com"
+      />
+    </div>
+  </div>
+  <div id="user-passbook" class="m-2">
+    <h1 class="m-2">Digital Learner's Passbook</h1>
+    <div id="co-curricular" class="m-2">
+      <h2 class="text-center p-2 bg-warning">Co-Curricular</h2>
+      <table id="course" class="table table-striped">
+        <thead>
+          <tr>
+            <th> Sr.</th>
+            <th> Subject</th>
+            <th>MarksObtained</th>
+            <th>Competency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let course of curricularActivities; let currIndex = index"
+          >
+            <tr>
+              <td>{{ currIndex + 1 }}</td>
+              <td>{{ course.subject }}</td>
+              <td>{{ course.marksObtained }}</td>
+              <td>{{ course.competency }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div id="certifications" class="m-2">
+      <h2 class="text-center p-2 bg-warning">Certifications</h2>
+      <table id="certificate" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Sr.</th>
+            <th>Certification</th>
+            <th>Marks/Grade</th>
+            <th>Competency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let certificate of certifications; let currIndex = index"
+          >
+            <tr>
+              <td>{{ currIndex + 1 }}</td>
+              <td>{{ certificate.certification }}</td>
+              <td>{{ certificate.marks_grade }}</td>
+              <td>{{ certificate.competency }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="extra-curricular" class="m-2">
+      <h2 class="text-center p-2 bg-warning">Extra Curricular</h2>
+      <table id="certificate" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Sr.</th>
+            <th>Certification</th>
+            <th>Marks/Grade</th>
+            <th>Competency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="
+              let extraCurricular of extraCurricularActivities;
+              let currIndex = index
+            "
+          >
+            <tr>
+              <td>{{ currIndex + 1 }}</td>
+              <td>{{ extraCurricular.certification }}</td>
+              <td>{{ extraCurricular.marks_grade }}</td>
+              <td>{{ extraCurricular.competency }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- <p>dlp ends!!</p> -->

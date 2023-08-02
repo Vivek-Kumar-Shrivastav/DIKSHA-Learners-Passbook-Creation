@@ -1,0 +1,12 @@
+<form #register ="ngForm" (ngSubmit)="registerForm()">
+    <h2>Register</h2>
+    <label for="emailId">Email</label>
+    <input type="text"  name= "emailId" id="emailId" #emailId ngModel required/>
+    <span>{{emailId.value}}</span>
+    
+    <label for="password">Password</label>
+    <input type="password" name="password" [(ngModel)] = "password" id="password" #passWord ngModel required/>
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" name="confirmPassword" [(ngModel)] = "confirm_password" id="confirmPassword" #confirmPassword ngModel required/>
+    <button type="submit" [disabled]="register.errors || register.invalid">Submit</button>
+</form>

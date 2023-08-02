@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#home-logo{
+    margin-right: 1rem;
+}
+
+a{
+    text-decoration:none;
+}
+
+.home-title{
+    color: rgb(40, 39, 39);
+}
+
+#home-title-title{
+    font-size: 1rem;
+}
+
+#home-title-about{
+    font-size: .8rem;
+}
