@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Certificate language="99" name="University Degree Marksheet" type="DGMST" number="0790398" issuedAt="" issueDate="" validFromDate="" status="A">
+    <IssuedBy>
+        <Organization name="Chaudhary Charan Singh University" code="" tin="" uid="" type="">
+            <Address type="" line1="" line2="" house="" landmark="" locality="" vtc="" district="" pin="" state="" country="IN"/>
+        </Organization>
+    </IssuedBy>
+    <IssuedTo>
+        <Person category="X" disabilityStatus="" dob="" email="" gender="X" maritalStatus="" motherName="NEELAM SRIVASTAV" name="POOJA SRIVASTAV" phone="" religion="" swd="" swdIndicator="" uid="" title="">
+            <Address type="" line1="" line2="" house="" landmark="" locality="" vtc="" district="" pin="" state="" country="IN"/>
+            <Photo format="" CurrentNodeValue=""/>
+        </Person>
+    </IssuedTo>
+    <CertificateData>
+        <School name="J V JAIN COLLEGE, SAHARANPUR" code=""/>
+        <Examination month="" name="" year="2010"/>
+        <Course name="B.COM. - ( FINAL )" id="">
+            <Streams>
+                <Stream name=""/>
+            </Streams>
+        </Course>
+        <Performance cgpa="" cgpaMax="" grade="" marksMax="" marksTotal="214" percentage="" result="PASS" resultDate="" updateDate="">
+            <Subjects>
+                <Subject code="003" gp="" gpMax="" grade="" marksMax="" marksMaxPractical="" marksMaxTheory="100" marksPractical="" marksTheory="72" marksTotal="" name="PHYSICAL EDUCATION"/>
+                <Subject code="013" gp="" gpMax="" grade="" marksMax="" marksMaxPractical="" marksMaxTheory="100" marksPractical="" marksTheory="78" marksTotal="" name="LANGUAGE COMM. &amp; WRITING SKILL-SANSKRIT"/>
+                <Subject code="301" gp="" gpMax="" grade="" marksMax="" marksMaxPractical="" marksMaxTheory="50" marksPractical="" marksTheory="23" marksTotal="" name="AUDITING"/>
+                <Subject code="302" gp="" gpMax="" grade="" marksMax="" marksMaxPractical="" marksMaxTheory="50" marksPractical="" marksTheory="31" marksTotal="" name="MONEY &amp; PUBLIC FINANCE"/>
+                <Subject code="303" gp="" gpMax="" grade="" marksMax="" marksMaxPractical="" marksMaxTheory="50" marksPractical="" marksTheory="17" marksTotal="" name="MANAGEMENT ACCOUNTING"/>
+                <Subject code="304" gp="" gpMax="" grade="" marksMax="" marksMaxPractical="" marksMaxTheory="50" marksPractical="" marksTheory="22" marksTotal="" name="INFORMATION TECHNOLOGY"/>
+                <Subject code="305" gp="" gpMax="" grade="" marksMax="" marksMaxPractical="" marksMaxTheory="50" marksPractical="" marksTheory="32" marksTotal="" name="PRINCIPLES OF MARKETING"/>
+                <Subject code="306" gp="" gpMax="" grade="" marksMax="" marksMaxPractical="" marksMaxTheory="50" marksPractical="" marksTheory="11" marksTotal="" name="PRINCIPLES OF FINANCE"/>
+            </Subjects>
+        </Performance>
+    </CertificateData>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+            <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+            <Reference URI="">
+                <Transforms>
+                    <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                </Transforms>
+                <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                <DigestValue>65b2/rMzJYV4LvQXbAyYOSUyl1UDADct94wwchreW10=</DigestValue>
+            </Reference>
+        </SignedInfo>
+        <SignatureValue>UoAlnXyDwS/kbDXvLvjXElaZDN6IIZs2ggbLYZ/ncSqhTZkLez1/fH369uNLb2EhFCWW83fpNCdPWmpA0X69i3DNsJbQHEkuQw4xVaeXxirLw1kZcc+BhgOTg1E6m8fFDooHfiXyoTv8seGKDxQG24LvH9eHhvebaQTdKtQWCc5AH9hkZqv8dXNSY4ZkbPnctPZgGR78AdmXzwsyIR3nqGxjhigXZ4B21McHUN4ukYw5bKpC+aJ5meJu1FYr8QDYAdcTU0s0Jt05fAUhMvuHLI2bctajRnumgewag38xEzFerVngcsnO7ClJ9PbDvRSDsVIf5l1GBw3hW2pjREj+Ww==</SignatureValue>
+        <KeyInfo>
+            <X509Data>
+                <X509SubjectName>ST=Delhi,telephoneNumber=b176790cc3a74b862e6b6b50814a8887a5f372ac5a0689eb5219c0b4a978583c,postalCode=110003,serialNumber=0f30cb67333f634db11fdb41868b343a6f0469581bdb9fd2a2e4cb59e7797a43,CN=DS MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY 01,OU=NeGD,O=MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY,C=IN</X509SubjectName>
+                <X509Certificate>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</X509Certificate>
+                <X509SubjectName>CN=CCA India 2014,O=India PKI,C=IN</X509SubjectName>
+                <X509Certificate>MIIDIzCCAgugAwIBAgICJ60wDQYJKoZIhvcNAQELBQAwOjELMAkGA1UEBhMCSU4xEjAQBgNVBAoTCUluZGlhIFBLSTEXMBUGA1UEAxMOQ0NBIEluZGlhIDIwMTQwHhcNMTQwMzA1MTAxMDQ5WhcNMjQwMzA1MTAxMDQ5WjA6MQswCQYDVQQGEwJJTjESMBAGA1UEChMJSW5kaWEgUEtJMRcwFQYDVQQDEw5DQ0EgSW5kaWEgMjAxNDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN7IUL2K/yINrn+sglna9CkJ1AVrbJYBvsylsCF3vhStQC9kb7t4FwX7s+6AAMSakL5GUDJxVVNhMqf/2paerAzFACVNR1AiMLsG7ima4pCDhFn7t9052BQRbLBCPg4wekx6j+QULQFeW9ViLV7hjkEhKffeuoc3YaDmkkPSmA2mz6QKbUWYUu4PqQPRCrkiDH0ikdqR9eyYhWyuI7Gm/pc0atYnp1sru3rtLCaLS0ST/N/ELDEUUY2wgxglgoqEEdMhSSBL1CzaA8Ck9PErpnqC7VL+sbSyAKeJ9n56FttQzkwYjdOHMrgJRZaPb2i5VoVo1ZFkQF3ZKfiJ25VH5+8CAwEAAaMzMDEwDwYDVR0TAQH/BAUwAwEB/zARBgNVHQ4ECgQIQrjFz22zV+EwCwYDVR0PBAQDAgEGMA0GCSqGSIb3DQEBCwUAA4IBAQAdAUjv0myKyt8GC1niIZplrlksOWIR6yXLg4BhFj4ziULxsGK4Jj0sIJGCkNJeHl+Ng9UlU5EI+r89DRdrGBTF/I+g3RHcViPtOne9xEgWRMRYtWD7QZe5FvoSSGkW9aV6D4iGLPBQML6FDUkQzW9CYDCFgGC2+awRMx61dQVXiFv3Nbkqa1Pejcel8NMAmxjfm5nZMd3Ft13hy3fNF6UzsOnBtMbyZWhS8Koj2KFfSUGX+M/DS1TG2ZujwKKXCuKq7+67m0WF6zohoHJbqjkmKX34zkuFnoXaXco9NkOi0RBvLCiqR2lKfzLM7B69bje+z0EqnRNo5+s8PWSdy+xt</X509Certificate>
+                <X509SubjectName>CN=Capricorn CA 2014,houseIdentifier=G5,VIKAS DEEP BUILDING,street=18,LAXMI NAGAR DISTRICT CENTER,ST=DELHI,postalCode=110092,OU=Certifying Authority,O=Capricorn Identity Services Pvt Ltd.,C=IN</X509SubjectName>
+                <X509Certificate>MIIEyjCCA7KgAwIBAgICJ74wDQYJKoZIhvcNAQELBQAwOjELMAkGA1UEBhMCSU4xEjAQBgNVBAoTCUluZGlhIFBLSTEXMBUGA1UEAxMOQ0NBIEluZGlhIDIwMTQwHhcNMTYwNTEyMTAwMzA1WhcNMjQwMzA1MDYzMDAwWjCB4jELMAkGA1UEBhMCSU4xLTArBgNVBAoTJENhcHJpY29ybiBJZGVudGl0eSBTZXJ2aWNlcyBQdnQgTHRkLjEdMBsGA1UECxMUQ2VydGlmeWluZyBBdXRob3JpdHkxDzANBgNVBBETBjExMDA5MjEOMAwGA1UECBMFREVMSEkxJzAlBgNVBAkTHjE4LExBWE1JIE5BR0FSIERJU1RSSUNUIENFTlRFUjEfMB0GA1UEMxMWRzUsVklLQVMgREVFUCBCVUlMRElORzEaMBgGA1UEAxMRQ2Fwcmljb3JuIENBIDIwMTQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDTeRm/NQgUluYeSKyKb+ahHHl/MqdPXsFs/uoSF9B+fiwpfeFBUIUNNEw62BJaWjs2gwT9SnZBPLORXRFBUy/yv0s5eXcIpL/47/Sq8gfUQbVuBVCmu4oY2Sbigd8qi+Y/IhLHbpuaCugkSxQYvb6dfBR81PwSD6WaGpTFDyiJEhWPlEpzQaKTaJFVl45R/hykwl1CY7nwjU+VklaMwWyNqOxDVHNv3I8c0BXKIDMKx7PghKhEL8kbRzu1Uzi1te6iYJSsREFHGztz0I6OGvX5Ngc1wsx5sZQyxsqTeVgN1w+1cDI046DLKlG0kcx/CnC/d6lNuz9xe2+3A3GIgiFzAgMBAAGjggEvMIIBKzATBgNVHSMEDDAKgAhCuMXPbbNX4TCBgAYIKwYBBQUHAQEEdDByMB4GCCsGAQUFBzABhhJodHRwOi8vb2N2cy5nb3YuaW4wUAYIKwYBBQUHMAKGRGh0dHA6Ly93d3cuY2NhLmdvdi5pbi9jY2Evc2l0ZXMvZGVmYXVsdC9maWxlcy9maWxlcy9DQ0FJbmRpYTIwMTQuY2VyMBIGA1UdIAQLMAkwBwYFYIJkZAIwRgYDVR0fBD8wPTA7oDmgN4Y1aHR0cDovL2NjYS5nb3YuaW4vcncvcmVzb3VyY2VzL0NDQUluZGlhMjAxNExhdGVzdC5jcmwwEQYDVR0OBAoECEOABKAHteDPMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEAMA0GCSqGSIb3DQEBCwUAA4IBAQBYGjeeabZFUG68NGu+0fMETRzc0tfG/1tvIJVvK5ZCQx9Un2EXcATCD+icHkklKwBR+VeNQbtYrreMWP97tJqLuz4n/KCv57GRw8l55ktxkqFQLl7Z1r3rPl1moWHXkuW454cKRVVdjQ/BIfKr5gx3a5zLbYp7XcWIb88vAVD/LKc1LCStIk7h54/VClBiBmeXze5RkBB2awzu6W2sU7l53oxUoTSatafMM5n5HKxGvLvAcCPU7XCr10v4hEZp4TwPJ8kZOddNSUbHeL8gftpgJvLlzNI4nXppSQzzdQtTJpdL7CRwd735/i6I6hOxGAI1WSutzTcR9pHjvLadOXCj</X509Certificate>
+            </X509Data>
+        </KeyInfo>
+    </Signature>
+</Certificate>

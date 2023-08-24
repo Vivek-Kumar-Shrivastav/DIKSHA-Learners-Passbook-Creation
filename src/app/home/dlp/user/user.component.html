@@ -1,0 +1,30 @@
+<div id="user-detail" class="m-3">
+  <div id="user-profile">
+    <img
+      id="user-profile-image"
+      src="assets/images/tri-color-bg.png"
+      alt="{{ user.name }}"
+    />
+  </div>
+
+  <div id="user-credentials" class="m-2">
+    <!-- <p>{{welcomeMessage}}</p>> -->
+    <p><span>Name</span>{{ user.name }}</p>
+    <p><span>DoB</span>{{ user.dob }}</p>
+    <p><span>Mother Name</span>{{ user.motherName }}</p>
+    <p><span>Father Name</span>{{ user.fatherName }}</p>
+    <p><span>Gender</span>{{ user.gender }}</p>
+    <!-- <p><span>Age</span>{{ age }}</p> -->
+    <!-- <p *ngIf="aadhar != ''"><span>Aadhar</span>{{ aadhar }}</p> -->
+  </div>
+
+  <!-- QR-Code -->
+
+  <div>
+    <img
+      id="qr-image"
+      src="https://www.kindpng.com/picc/m/120-1202089_qr-code-transparent-png-qr-code-png-png.png"
+      alt="Qr Code Transparent Png - Qr Code Png, Png Download@kindpng.com"
+    />
+  </div>
+</div>

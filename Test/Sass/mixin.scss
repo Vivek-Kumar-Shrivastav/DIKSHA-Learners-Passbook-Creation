@@ -1,0 +1,23 @@
+@use 'theme1';
+  
+  @mixin theme2($theme2: Pink) {
+    background: $theme2;
+    box-shadow: 0 0 1px rgba($theme2, .25);
+    color: #fff;
+  }
+  
+  %info-shared {   // Extend/Inheritance
+    @include theme2;
+  }
+  .alert {
+    @include theme1.theme1($theme1: DarkRed);
+    @include theme2($theme2: Yellow)
+  }
+  .success {
+   @extend %info-shared;
+   border: 1px solid black;
+  }
+
+
+//  [ @mixin, @include] : It can take values as parameter and is 'Customisable' and 'reusable'.
+//   [%placholder-Class, @extend] : It is 'reusable' classes with '%' as prefix.

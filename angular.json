@@ -68,8 +68,9 @@
             },
             "development": {
               "browserTarget": "DIKSHA-DLP:build:development"
-            }
+            }            
           },
+          
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
@@ -100,3 +101,5 @@
     }
   }
 }
+
+

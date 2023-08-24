@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE students SYSTEM "student.dtd">
+<students>
+    <student sid="S1" lang="C++">
+        <name>Vivek</name>
+        <salary>50000</salary>
+    </student>
+    <student sid="S2" lang="Python">
+        <name>Vivek</name>
+        <salary>50000</salary>
+    </student>
+</students>
