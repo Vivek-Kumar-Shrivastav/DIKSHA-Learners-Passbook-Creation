@@ -5,28 +5,40 @@ import { Subject, Subjects } from '../home/HelperInterfaces/CertificateData';
   providedIn: 'root'
 })
 export class CertificateDataService {
- 
   subjects : any;
   certificates: Subjects;
   constructor() { 
-    this.certificates = { subjects: [], certificateOf: '' };
+
+    //Try to use constructor of Subject interface to initialize this.certificate
+    this.certificates = {subjects : [], uri :'', certificateOf: '',};
   }
 
-  getData(xmlDoc :Document){
+  getData(certificate : any){   // declare the type of certificate 
     let newCertificates : Subjects = Object.assign({}, this.certificates);
-    newCertificates.certificateOf = xmlDoc
+    
+    // certificateOf
+    newCertificates.certificateOf = certificate.xml   
     ?.getElementsByTagName('Certificate')[0]
     ?.getAttribute('name')!;
 
+    // URI
+    newCertificates.uri = certificate.uri;  //blob
+    // window.open(certificate.pdf, '_blank');
+
     // Data-Cleaning or Data-Preprocessing
-    this.subjects = Array.from(xmlDoc?.getElementsByTagName('Subject'));
-    this.subjects = this.subjects.filter(
-      (subject) => subject?.getAttribute('name') != ''
-    );
+    this.subjects = Array.from(certificate.xml?.getElementsByTagName('Subject'));
+    if(this.subjects.length == 0){
+      return newCertificates;  // blank or only uri.
+    }
     
+    // Removing any blank Entry
+    this.subjects = this.subjects.filter(
+      (subject) => subject.getAttribute('name') != ''
+    );
+
     // Data-Extraction
     let sub: Subject = { name: '', marks: '' , gp: '' };
-    
+
     newCertificates.subjects = this.subjects.map((subject) => {
       let newSub = Object.assign({}, sub);
       newSub.name = subject?.getAttribute('name');

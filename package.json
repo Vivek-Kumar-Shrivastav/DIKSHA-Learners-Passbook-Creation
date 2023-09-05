@@ -20,8 +20,13 @@
     "@angular/router": "^16.1.0",
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
+    "ng-otp-input": "^1.9.2",
+    "ngx-extended-pdf-viewer": "^18.0.0-beta.4",
+    "ngx-filesaver": "^16.0.0",
+    "pdfjs-dist": "^3.9.179",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xml-js": "^1.6.11",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

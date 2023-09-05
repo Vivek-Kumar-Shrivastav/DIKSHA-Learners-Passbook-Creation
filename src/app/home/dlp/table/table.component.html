@@ -1,4 +1,6 @@
-<h6 class="text-center p-2 bg-info">{{ certificate }}</h6>
+<div class="d-flex" >
+  <h4 class="text-center m-2 bg-info" style ="width: 100%;">{{ certificate | titlecase }} <img src ="../../../../assets/images/download.png" alt = "download" id ="download" class = "btn justify-content-end" style="height : 3rem;" (click) = "download()"/></h4>
+</div>
 <table id="course" class="table table-striped">
   <thead>
     <tr>
@@ -6,6 +8,8 @@
       <th>Subject</th>
       <th>MarksObtained</th>
       <th>Competency</th>
+      <!-- <th><img src ="../../../../assets/images/download.png" alt = "download" class = "btn"> </th> -->
+      <!-- <th><button class = "btn btn-danger" (click">Download</button></th> -->
     </tr>
   </thead>
   <tbody>

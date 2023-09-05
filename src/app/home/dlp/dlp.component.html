@@ -5,18 +5,32 @@
 <button class="btn btn-primary m-2" (click)="getUserData()"> Get data</button> -->
 
 <div id="dlp">
-  <app-user [user]="user"></app-user>
+<app-user [user]="user"></app-user>
   
-  <div id="user-passbook" class="m-2">
+   <div id="user-passbook" class="m-2">
     <h1 class="m-2">Digital Learner's Passbook</h1>
-    <h2 class="text-center p-2 bg-warning">Co-Curricular</h2>
-    <ng-container *ngFor="let certificate of coCurricularActivities">
-      <app-co-curricular [certificate]="certificate.certificateOf" [subjects]="certificate.subjects">
+    <div class="d-flex justify-content-center bg-warning">
+      <h2 class="text-center align-item-baseline">Co-Curricular</h2>
+      
+    </div>
+
+    <!-- images -->
+
+    <!-- <ng-container *ngFor="let certificate of docsImg"> -->
+     <!-- <object data = "data"  width="800"
+     height="500"></object>
+
+     <h1>{{data}}</h1> -->
+    <!-- </ng-container>  -->
+    <!-- <h6 class="text-center p-2 bg-info">{{ certificate }}</h6> -->
+
+    <ng-container *ngFor= "let certificate of coCurricularActivities">
+      <app-co-curricular [certificate]= "certificate.certificateOf" [uri] = "certificate.uri" [subjects]= "certificate.subjects">
       </app-co-curricular>
     </ng-container>
 
-    <app-certificate></app-certificate>   
-    <app-extra-curricular> </app-extra-curricular>
+    <!-- <app-certificate></app-certificate>   
+    <app-extra-curricular> </app-extra-curricular> -->
   </div>
-  
+</div>
 

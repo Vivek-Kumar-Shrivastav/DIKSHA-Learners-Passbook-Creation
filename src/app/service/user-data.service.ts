@@ -16,17 +16,17 @@ export class UserDataService {
     // this.testData.next("Data-0");
   }
   
-  getData(key = "usrData") {
-    return localStorage.getItem(`${key}`) == null ? "No data is stored corresponding to this key" : localStorage.getItem(`${key}`)!;
+  getData(key :number = 0) {
+    return localStorage.getItem(`${key}`) == null ?`{"no-data": "No data is stored corresponding to this key"}` :localStorage.getItem(`${key}`)!;
   }
 
   updateData(index: number, data: string){
     localStorage.setItem(`${index}`, data);
-    this.data$ = localStorage.getItem(`${index}`)!;
+    this.data$ = data;
   }
 
-  printData(){
-      console.log(localStorage.getItem("usrData")!);
+  printData(key = "usrData"){
+      console.log(localStorage.getItem(`${key}`)!);
   }
  
 }
