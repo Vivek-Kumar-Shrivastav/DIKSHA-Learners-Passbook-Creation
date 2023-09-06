@@ -1,7 +1,12 @@
 <div id="co-curricular" class="m-2">
-  <app-table [certificate] = "certificate" [subjects]= "subjects"></app-table>
+  <app-table
+    [certificate]= "certificate"
+    [uri]= "uri"
+    [subjects]= "subjects"
+    [rollNumber] = "rollNumber"
+  ></app-table>
 
-    <!-- <h6 class="text-center p-2 bg-warning">{{certificate}}</h6>
+  <!-- <h6 class="text-center p-2 bg-warning">{{certificate}}</h6>
     <table id="course" class="table table-striped">
       <thead>
         <tr>
@@ -24,7 +29,7 @@
       </tbody>
     </table> -->
 
-     <!-- <ng-container
+  <!-- <ng-container
           *ngFor="let course of curricularActivities; let currIndex = index"
         > -->
-  </div>
+</div>

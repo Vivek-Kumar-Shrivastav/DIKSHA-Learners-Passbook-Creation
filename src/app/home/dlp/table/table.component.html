@@ -1,4 +1,6 @@
-<h6 class="text-center p-2 bg-info">{{ certificate }}</h6>
+<div class="d-flex" >
+  <h6 class="text-center m-2 bg-info d-flex justify-content-around align-item-baseline" style ="width: 100%;">{{ certificate | titlecase }} <span >Rollnumber : {{rollNumber}}</span><img src ="../../../../assets/images/download.png" alt = "download" id ="download" class = "btn justify-content-end" style="height : 3rem;" (click) = "download()"/></h6>
+</div>
 <table id="course" class="table table-striped">
   <thead>
     <tr>
@@ -6,6 +8,7 @@
       <th>Subject</th>
       <th>MarksObtained</th>
       <th>Competency</th>
+      <th>Strength</th>
     </tr>
   </thead>
   <tbody>
@@ -16,8 +19,9 @@
       <tr>
         <td>{{ currIndex + 1 }}</td>
         <td>{{ course.name }}</td>
-        <td>{{ course.marks }}</td>
-        <td>{{ course.gp }}</td>
+        <td>{{ course.marksObtained }}</td>
+        <td>{{ course.gp  }}</td>
+        <td>{{ course.gp  > 8 ? "Strong" : "Moderate"}}</td>
       </tr>
     </ng-container>
   </tbody>

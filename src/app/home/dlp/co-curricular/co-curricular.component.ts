@@ -9,4 +9,6 @@ import { Subject } from '../../HelperInterfaces/CertificateData';
 export class CoCurricularComponent {
   @Input() certificate : string ="";
   @Input() subjects : Subject[] = [];
+  @Input() uri : string ="";
+  @Input() rollNumber : string = "";
 }
