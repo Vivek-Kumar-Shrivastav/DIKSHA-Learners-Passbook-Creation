@@ -1,3 +1,8 @@
+*{
+    margin :0;
+    padding : 0;
+    box-sizing: border-box;
+}
 
 h1{
     font-size: 2rem;
@@ -8,28 +13,26 @@ h2{
 }
 #user-detail{
     display: flex;
-    width: 70vw;
-    padding: .25rem .5rem;
+    width: 100;
+    padding: 5px;
     border: 1px solid rgb(172, 184, 211);
     align-items: center;
-
-    /* margin: 1rem; */
 }
 
-th, tr{
-    width: 15vw !important;
-    padding-left: 1rem;
-}
-
-#user-credentials > p > span {
+.user-field{
     display: inline-block;
     font-weight: 600;
-    width : 5rem;
+    min-width : 15rem;
     /* margin-right: 1rem; */
 }
+.user-attributre{
+    word-wrap: break-word;
+}
 #user-profile-image{
-  width: 150px;
-  height: 200px; 
+  width : 133px;
+  max-width: 150px;
+  height: 150px;
+  max-height: 200px; 
   padding: .25rem;
   border: 1px solid rgb(172, 184, 211);
 }
@@ -41,5 +44,13 @@ th, tr{
 }
 
 #qr-image{
-    width: 200px !important;
+    width: 10vw;
+    min-width: 60px;
+    max-width: 150px;
+}
+
+@media (max-width: 810px) {
+    .user-field{
+        display: block;
+    }
 }

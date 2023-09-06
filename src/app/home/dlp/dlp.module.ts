@@ -7,14 +7,18 @@ import { TableComponent } from './table/table.component';
 import { FormsModule } from '@angular/forms';
 import { DlpComponent } from './dlp.component';
 import { ExtraCurricularComponent } from './extra-curricular/extra-curricular.component';
-
-
+import { FileSaverModule } from 'ngx-filesaver';
 
 @NgModule({
-  declarations: [UserComponent, CertificateComponent, CoCurricularComponent, ExtraCurricularComponent, TableComponent, DlpComponent],
-  imports: [
-    CommonModule, FormsModule
+  declarations: [
+    UserComponent,
+    CertificateComponent,
+    CoCurricularComponent,
+    ExtraCurricularComponent,
+    TableComponent,
+    DlpComponent,
   ],
-  exports: [DlpComponent]
+  imports: [CommonModule, FormsModule, FileSaverModule],
+  exports: [DlpComponent],
 })
-export class DLPModule { }
+export class DLPModule {}

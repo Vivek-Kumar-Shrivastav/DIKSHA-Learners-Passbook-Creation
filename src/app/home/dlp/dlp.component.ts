@@ -19,7 +19,7 @@ import { CertificateDataService } from 'src/app/service/certificate-data.service
 })
 export class DlpComponent implements OnInit, OnChanges, OnDestroy {
   // data : Observable<string> ;
-  data: string = '';
+  data: Array<string> = [];
   welcomeMessage: string = 'Hey Vivek';
 
   user: Credentials = {
@@ -34,55 +34,86 @@ export class DlpComponent implements OnInit, OnChanges, OnDestroy {
   coCurricularActivities: Subjects[];
   extraCurricularActivities: any = [];
   curricularActivities: any = [];
+  docsImg: Array<string> = [];
 
   constructor(
-    private _dataService: UserDataService,
-    private _extractUser: ExtractUserDetailService,
-    private _certificateData : CertificateDataService
+    private _userDataService: UserDataService,
+    private _extractUserDetail: ExtractUserDetailService,
+    private _certificateData: CertificateDataService
   ) {
-    this.certificates = { subjects: [], certificateOf: '' };
+    this.certificates = { certificateOf: '', uri: '', subjects: [], rollNumber : '' };
     this.coCurricularActivities = [];
     this.extraCurricularActivities = [];
     this.curricularActivities = [];
   }
 
-  async ngOnInit() { 
-      await this.getDataFromLocalStorage();
+  async ngOnInit() {
+    await this.getDataFromLocalStorage();
   }
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes);
-    // this.data=  this._dataService.getData();
+    // this.data=  this._userDataService.getData();
   }
   ngOnDestroy(): void {
+    alert(localStorage.getItem('0'));
     localStorage.clear();
   }
 
   downloadDlp() {
     const dlp = document.getElementById('download');
   }
-  getUserData() {
-    return (this.data = this._dataService.getData());
-  }
+  // getUserData() {
+  //   return (this.data = this._userDataService.getData());
+  // }
+
   printData() {
-    this._dataService.printData();
+    this._userDataService.printData();
   }
 
-  getDataFromLocalStorage(){
+  async getDataFromLocalStorage() {
     for (let fileNum = 0; fileNum < localStorage.length; fileNum++) {
-    // Use it to turn your xmlString into an XMLDocument
-      let parser = new DOMParser();
-      this.data = this._dataService.getData(`${fileNum}`);
-      let xmlDoc = parser.parseFromString(this.data, 'text/xml');
-    
-      //User-Details  
-      let certificateType = xmlDoc?.getElementsByTagName('Certificate')[0]?.getAttribute('type');
-      if ( certificateType == 'SSCER')
-        this.user = this._extractUser.getDetails(xmlDoc);
+      // Use it to turn your xmlString into an XMLDocument
+      // File[index] will have two things pdf : ".blob" and xml : ".xml";
+      //  console.log(`File ${fileNum}: ${this.data}`);
+      
+      let file;
+      try {
+        file = await JSON.parse(this._userDataService.getData(fileNum));
+        
+         if("no-data" in file) {
+          continue;
+         }
+        // let pdf = this.data[0];
+        // window.open(pdf, '_blank');
+        let parser = new DOMParser();
+        let xml = parser.parseFromString(file.xml, 'text/xml'); // will not give an error
 
-      // Certificate Details
-      let newCertificates : Subjects = this._certificateData.getData(xmlDoc);
-      console.log(`NewCertis : ${newCertificates}`);
-      this.coCurricularActivities.push(newCertificates);
+        //User-Details
+        let certificateType = xml?.getElementsByTagName('Certificate')[0]?.getAttribute('type');
+
+        console.log("CertificateType :",certificateType);
+        if(certificateType == null || certificateType == undefined){
+          continue;
+          //skip this certificate, since it is not an Academic Record
+          // You can ask the user if he/she wamnts to share the aadhar card or not and then make the required changes hare.
+        }
+        if (certificateType == 'SSCER') {
+          this.user = this._extractUserDetail.getDetails(xml);
+          console.log(this.user);
+        }
+        // Certificate Details
+        let newCertificates: Subjects = this._certificateData.getData({
+          uri: file.uri,
+          xml: xml,
+        });
+        console.log(`NewCertis : ${newCertificates}`);
+
+        //Add uri to later extract pdf
+        this.coCurricularActivities.push(newCertificates);
+      } catch (err) {
+        console.log('Error in getting dat from localStorage', err);
+        continue;
+      }
     }
   }
 }

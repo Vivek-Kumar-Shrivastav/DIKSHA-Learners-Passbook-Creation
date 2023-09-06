@@ -22,7 +22,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
@@ -68,9 +73,8 @@
             },
             "development": {
               "browserTarget": "DIKSHA-DLP:build:development"
-            }            
+            }
           },
-          
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
@@ -101,5 +105,3 @@
     }
   }
 }
-
-
