@@ -5,6 +5,7 @@ The Learners Passbook will act as a digital passbook for access by relevant stak
 ## Development server
 The Tech Stack used for this project is Angular for the frontend and NodeJS for the backend. Along with that styling has been applied using Bootstrap and the different libraries used are mentioned below.
 
+
 ## Frontend
 
 ### Setup
@@ -42,8 +43,3 @@ Install the NodeJs library inorder to run backend service : [Download NodeJs](ht
                   
                    └──index.js
                    
-     
-
-
-   
-
