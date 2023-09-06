@@ -1,0 +1,5 @@
+th, tr{
+    max-width: 15vw !important;
+    padding-left: 1rem;
+    line-height: 16px;
+}

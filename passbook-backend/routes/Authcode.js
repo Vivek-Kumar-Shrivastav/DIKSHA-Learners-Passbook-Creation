@@ -1,5 +1,7 @@
 import express from "express"
 import axios from "axios";
+import dotenv from "dotenv"
+dotenv.config();
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -10,10 +12,10 @@ router.get("/", async (req, res) => {
           params:
           {
             redirect_uri: "http://localhost:4200/DLP",
-            client_id: "NQ44FD04AE",
+            client_id: process.env.CLIENT_ID,
             response_type: "code",
             state: "Testing",
-            code_challenge: "CBUw14zO94M8trTZzPE99ZAvb3N0bRsfy_6vbDcba0c",
+            code_challenge: process.env.CODE_CHALLENGE,
             code_challenge_method: "S256",
             // scope : "openid"
           },

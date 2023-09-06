@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import {combineLatest,
-  Observable,
-} from 'rxjs';
+import { combineLatest, Observable, lastValueFrom } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { GetAuthorisatonService } from '../service/get-authorisaton.service';
 import { UserDataService } from '../service/user-data.service';
@@ -39,9 +37,6 @@ export class HomeComponent {
         } else {
           const url = tab?.location.href;
 
-          // window.alert(url);
-          // window.alert("Windows is open");
-
           const param = new URLSearchParams(url?.split('?')[1]);
 
           //Auth-Code
@@ -53,116 +48,50 @@ export class HomeComponent {
             console.log(this.code);
 
             //Temp
-            localStorage.setItem("code", this.code);
+            localStorage.setItem('code', this.code);
 
             clearInterval(interval);
             let body = { code: this.code };
             console.log(`Body : ${body}`);
 
-            //=========================================BREAK-POINT======================================//
-            //Accesing-Token
             this.getToken();
-            // Try to get access token here using async-await
-
-            /* 
-              console.timeEnd("getToken");
-              console.log(`got token : ${this.token}`);
-            */
-
-            //Getting-User-Details
-
+           
             console.log(`Going to fetch the details and Token = ${this.token}`);
-            // this.getDetails();
-
-            // Get-All-Files
-            // this.files = await this.getFiles();
-            // console.log(`Files : ${this.files}`);
-
-            // console.log(`Length itni hai : ${this.files.length}`);  // Done till here.
-            // // const url = 'https://digilocker.meripehchaan.gov.in/public/oauth2/1/file/in.gov.pan-PANCR-IWPPS2386E';
-            // const file = 'http://localhost:5000/api/file';
-            // for (let fileNum = 0; fileNum < this.files.length;fileNum++)
-            // {
-            //   // console.log(`URI: ${files.items[fileNum].uri}`);
-            //   let params = new HttpParams().set('token', response.access_token)
-            //   .set(`uri`, this.files[fileNum].uri);
-            //   console.log(`URI-${fileNum}: ${this.files[fileNum].uri}`);
-            //    await this.http.get<any>(
-            //     file,
-            //     {
-            //       params: params,
-            //       responseType: 'arraybuffer' as 'json',
-            //     }
-            //   )
-            //   .subscribe(async (res)=>{
-            //     let xmlString :string = res[1];
-            //     let pdf :string  = pdf;
-            //     let blob : string = "" ;
-
-            //     let fileType  = await pdf.split(";")[0];
-            //     let render = "blob";
-            //     if(fileType == "data:application/pdf"){
-            //       render = "base64";
-            //       // console.log(`Render : ${render} and Rendering \n ${res}`);
-            //     }
-            //     else{
-            //       // console.log(`Render : ${`${res}`.split("%")[1]}} and Rendering \n ${res}`);
-            //     }
-
-            //     blob = await this.processFileResponse(res, "demonahihai.pdf", render)!;
-            //     // this.downloadFile(res, "demonahihai.pdf");
-
-            //     // Use it to turn your xmlString into an XMLDocument
-            //     var parser = new DOMParser();
-            //     var xmlDoc = parser.parseFromString(
-            //       xmlString,
-            //       'text/xml'
-            //     );
-            //     // this.studentData  = file;
-
-            //     let data = JSON.stringify([blob, xmlString]);
-            //     this._userDataService.updateData(fileNum, data);
-            //     this.studentData.push(this._userDataService.getData(fileNum));
-
-            //     // this._userDataService.getData().subscribe(res=>{
-            //     //     this.studentData = res;
-            //     // })
-
-            //     console.log(
-            //      `${ xmlDoc.getElementsByTagName('Certificate')[0].getAttribute('name')},
-            //       ${file}`
-            //     )
-            //   })
-            // }
+            
           }
         }
       }, 1000);
     });
   }
+
   // Helper functions
-  async processFileResponse(pdf: any, fileName: string, render: string) {
-    if (render === 'base64') {
-      this.base64Response = pdf;
-      const binaryString = window.atob(pdf);
-      const bytes = new Uint8Array(binaryString.length);
-      const binaryToBlob = bytes.map((byte, i) => binaryString.charCodeAt(i));
-      const blob = new Blob([binaryToBlob], { type: 'application/pdf' });
-      this.downloadFile(blob, fileName);
-    } else {
-      const blob = new Blob([pdf], { type: 'application/pdf' });
-      this.downloadFile(blob, fileName);
-    }
+
+  processFileResponse(pdf: any, fileName: string, render: string): Promise<Blob> {
+    let blob: Blob;
+    return new Promise<Blob>((resolve, reject) => {
+      if (render === 'base64') {
+        // const base64Response = pdf;
+        const binaryString = window.atob(pdf);
+        const bytes = new Uint8Array(binaryString.length);
+        const binaryToBlob = bytes.map((byte, i) => binaryString.charCodeAt(i));
+        blob = new Blob([binaryToBlob], { type: 'application/pdf' });
+      } else {
+        blob = new Blob([pdf], { type: 'application/pdf' });
+      }
+      resolve(blob);
+    });
   }
-  async downloadFile(blob: any, fileName: string) {
+  downloadFile(blob: any, fileName: string) {
     // Other Browsers
     const url = (window.URL || window.webkitURL).createObjectURL(blob);
     window.open(url, '_blank');
-
+    console.log('Downloading PDF...');
     // rewoke URL after 15 minutes    OR  Additionally, use can add the user(Accessor_) with grant he/she will always be able to access the docs
     // setTimeout(() => {
     //   window.URL.revokeObjectURL(url);
     // }, 30 * 60 * 1000);
   }
+
   async getToken(flag = 'details'): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       console.log('Inside getToken');
@@ -173,7 +102,7 @@ export class HomeComponent {
       let accessToken = '';
 
       this.http.post<any>(tokenURL, body).subscribe({
-        next:  (response) => {
+        next: (response) => {
           accessToken = response.access_token;
           // console.log(`Response : ${response.access_token}`);
           console.log(`getToken() = ${accessToken}`);
@@ -184,15 +113,14 @@ export class HomeComponent {
             console.log('Details fetched !!!');
             this.getFiles(accessToken);
             resolve(accessToken);
-           
           } else if (flag == 'token') {
-              // resolve()
+            // resolve()
           }
         },
         error: (err) => {
           accessToken = 'No Token';
           console.log('API Error: ', err);
-          resolve("no-access");
+          resolve('no-access');
         },
       });
       // return accessToken;
@@ -239,75 +167,13 @@ export class HomeComponent {
       },
     });
 
-    // Copy-Paste
-
-    // console.log(`Files : ${this.files}`);
-    // console.log(`Outsub Length itni hai : ${this.files.length}`);  // Done till here.
-    // // const url = 'https://digilocker.meripehchaan.gov.in/public/oauth2/1/file/in.gov.pan-PANCR-IWPPS2386E';
-
-    // const file = 'http://localhost:5000/api/file';
-    // for (let fileNum = 0; fileNum < this.files.length;fileNum++)
-    // {
-    //   // console.log(`URI: ${files.items[fileNum].uri}`);
-    //   let params = new HttpParams().set('token', this.token)
-    //   .set(`uri`, this.files[fileNum].uri);
-    //   console.log(`URI-${fileNum}: ${this.files[fileNum].uri}`);
-    //    await this.http.get<any>(
-    //     file,
-    //     {
-    //       params: params,
-    //       responseType: 'arraybuffer' as 'json',
-    //     }
-    //   )
-    //     .subscribe(async (res)=>{
-    //       let xmlString :string = res[1];
-    //       let pdf :string  = pdf;
-    //       let blob : string = "" ;
-
-    //       let fileType  = await pdf.split(";")[0];
-    //       let render = "blob";
-    //       if(fileType == "data:application/pdf"){
-    //         render = "base64";
-    //         // console.log(`Render : ${render} and Rendering \n ${res}`);
-    //       }
-    //       else{
-    //         // console.log(`Render : ${`${res}`.split("%")[1]}} and Rendering \n ${res}`);
-    //       }
-
-    //       blob = await this.processFileResponse(res, "demonahihai.pdf", render)!;
-    //       // this.downloadFile(res, "demonahihai.pdf");
-
-    //       // Use it to turn your xmlString into an XMLDocument
-    //       var parser = new DOMParser();
-    //       var xmlDoc = parser.parseFromString(
-    //         xmlString,
-    //         'text/xml'
-    //       );
-    //       // this.studentData  = file;
-
-    //       let data = JSON.stringify([blob, xmlString]);
-    //       this._userDataService.updateData(fileNum, data);
-    //       this.studentData.push(this._userDataService.getData(fileNum));
-
-    //       // this._userDataService.getData().subscribe(res=>{
-    //       //     this.studentData = res;
-    //       // })
-
-    //       console.log(
-    //        `${ xmlDoc.getElementsByTagName('Certificate')[0].getAttribute('name')},
-    //         ${file}`
-    //       )
-    //     })
-    //   }
+    
   }
   async storeFile() {
     console.log('Inside storeFile');
-    const fileURI = 'http://localhost:5000/api/file';
-    for (let fileNum = 0; fileNum < this.files.length; fileNum++) {
-      // console.log(`URI: ${files.items[fileNum].uri}`);
-      // let params = new HttpParams().set('token', this.token)
-      // .set(`uri`, this.files[fileNum].uri);
-
+    const urlXml = 'http://localhost:5000/api/file';
+    for (let fileNum = 2; fileNum < this.files.length; fileNum++) {
+      
       let body = {
         token: this.token,
         uri: this.files[fileNum].uri,
@@ -316,87 +182,61 @@ export class HomeComponent {
       console.log(`URI-${fileNum}: ${this.files[fileNum].uri}`);
       console.time(`${fileNum}`);
 
-      this.http
-        .post<any>(fileURI, body, { responseType: 'text' as 'json' })
-        .subscribe(async (res) => {
-          let xmlString: string = res; // xml-File
-          if (xmlString == 'no-xml') {
-            // store  karo url and xml_mein :no-
-            xmlString = `<?xml version="1.0" encoding="UTF-8" ?><NoXml>No XML</NoXml>`;
-          }
+      
+       this.http.post<any>(urlXml, body, { responseType: 'json' })
+      .subscribe(async (res) => {
+        let xmlFile: string = res.xml; // xml-File
+      
 
-          // console.log(`Response from file ${xmlString}`);
-          var parser = new DOMParser();
-          var xml = parser.parseFromString(xmlString, 'text/xml');
-          let data = JSON.stringify({ uri: body.uri, xml: xmlString }); // [uri, xml]
-          console.log("typeof(data)", typeof(data));
-          // console.log(`data :${data}`);
-          
-          await this._userDataService.updateData(fileNum, data);
-          await this.studentData.push(this._userDataService.getData(fileNum));
-          console.log(this._userDataService.getData(fileNum));
+        var parser = new DOMParser();
+        var xml = parser.parseFromString(xmlFile, 'text/xml');
 
-          let isNoXml =
-            xml.getElementsByTagName('NoXml')[0]?.childNodes[0]?.nodeValue;
-          console.log(
-            `NoXml : ${
-              xml.getElementsByTagName('NoXml')[0]?.childNodes[0]?.nodeValue
-            }`
-          );
-          // console.log(`${ xml.getElementsByTagName('Certificate')[0]?.getAttribute("name")}`);
-          // console.log(`${xml.getElementsByTagName('Certificate')[0]}`);
+        let data = JSON.stringify({ uri: body.uri, xml: xmlFile }); // [uri, xml]
+      
+        this._userDataService.updateData(fileNum, data);
+        this.studentData.push(this._userDataService.getData(fileNum));
+        // console.log(this._userDataService.getData(fileNum));
 
-          /* PDF-CODE
-            res = JSON.parse(res);
-            let pdf :string  = res.pdf;        // pdf-File
-            let blob : string = "" ;
-            console.log(`pdf : ${pdf}, XML : ${xmlString}`);
-
-            let fileType  = `${res}`.split(";")[0];
-            let render = "blob";
-
-            if(fileType == "data:application/pdf"){
-              render = "base64";
-              console.log(`Render : ${render} and Rendering \n ${JSON.stringify(res)}`);
-            }
-            else{ 
-              console.log(`Render : ${`${res}`.split("%")[1]} and Rendering \n ${res}`);
-            }
-          
-            this.processFileResponse(res, "demonahihai.pdf", "blob");
-          
-            XML-File 
-            console.timeEnd(`${fileNum}`);
-            console.log(`Request-${fileNum} : Finished`);
-            */
-        });
+        let isNoXml =
+          xml.getElementsByTagName('NoXml')[0]?.childNodes[0]?.nodeValue;
+        console.log(
+          `NoXml : ${
+            xml.getElementsByTagName('NoXml')[0]?.childNodes[0]?.nodeValue
+          }`
+        );
+      
+      });
     }
-  }
+
+
+    const urlPdf = 'http://localhost:5000/api/pdf';
+    for (let fileNum = 0; fileNum < this.files.length; fileNum++) {
+  
+      let body = {
+        token: this.token,
+        uri: this.files[fileNum].uri,
+      };
+      console.log(`Token : ${this.token}`);
+      console.log(`URI-${fileNum}: ${this.files[fileNum].uri}`);
+      console.time(`${fileNum}`);
+
+       this.http.post<any>(urlPdf, body, { responseType: "blob" as 'json' })
+      .subscribe(async (res) => {
+          let pdfFile = res;
+       
+            let blob = await this.processFileResponse(
+                pdfFile,
+              'demonahihai.pdf',
+              'blob'
+            );
+            await  this.downloadFile(blob, 'newFile.pdf');
+         
+
+      });
+    }
+  }  
 }
 
-// XML-File
 
-// window.open(blob, '_blank');
 
-// this.downloadFile(res, "demonahihai.pdf");
 
-// Use it to turn your xmlString into an XMLDocument
-
-// var parser = new DOMParser();
-// var xmlDoc = parser.parseFromString(
-//   xmlString,
-//   'text/xml'
-// );
-
-// let data = JSON.stringify([blob, xmlDoc]);     // [pdf, xml]
-// this._userDataService.updateData(fileNum, data);
-// this.studentData.push(this._userDataService.getData(fileNum));
-
-// this._userDataService.getData().subscribe(res=>{
-//     this.studentData = res;
-// })
-
-// console.log(
-//  `${ xmlDoc.getElementsByTagName('Certificate')[0].getAttribute('name')},
-//   ${xmlString}`
-//   )

@@ -1,19 +1,21 @@
 import express from "express";
 import axios from "axios";
+import dotenv from "dotenv"
+dotenv.config();
 const router = express.Router();
 
 router.post("/", async (req, res) => {
     //  res.json({code : "45895f66133964f3aa15daf71cc9802abd4817f4"});
 
   const tokenEndpoint = "https://digilocker.meripehchaan.gov.in/public/oauth2/2/token";
-  const clientId = "NQ44FD04AE";
-  const clientSecret = "0d577d436ac1c0877743";
+  const clientId = process.env.CLIENT_ID;
+  const clientSecret = process.env.CLIENT_SECRET;
   const authCode = req.body.code;
   console.log("Authcode", authCode);
   console.log(`Authcode: ${authCode}`);
   const redirectUri = "http://localhost:4200/DLP";
   
-  const codeVerifier = "ANXS4OMH4MRU2SY5YP2XETL52ILM390HAU6W9ABWV64";
+  const codeVerifier = process.env.CODE_VERIFIER;
   const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");  
 
   const data = new URLSearchParams();

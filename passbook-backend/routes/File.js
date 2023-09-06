@@ -1,15 +1,14 @@
 import express from "express";
 import axios from "axios";
+import fs from "fs";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
  
     console.log("/inside/api/file");
-    
-    /*Cut-pdf-config*/
-  
-    //Comment-1
-    let config ={
+    let xml = "";
+
+    let configXml ={
       method : 'get',
       maxBodyLength: Infinity,
       url: `https://digilocker.meripehchaan.gov.in/public/oauth2/1/xml/${req.body.uri}`,
@@ -18,21 +17,26 @@ router.post("/", async (req, res) => {
         mode : 'no-cors'
       },
     }
+   
     console.log("Fetching axios");
-    axios(config).then(
-      (xml)=>{
-        console.log(`uri : ${req.body.uri}`);
-        res.send(xml.data) ;
-      },
-      (error)=>{
-            console.log(`uri : ${req.body.uri}`);
-            console.log(`Error in /api/file : ${error}`);
-            res.send("no-xml");
-          }
-    );
-      console.log("response sent");
-    // Cut-1
-  
-  });
 
+    try{
+     
+      xml = await axios(configXml)
+      
+      console.log(`uri : ${req.body.uri} and xml is : ${xml.data}`);
+
+      res.send({xml : `${xml.data}`}) ;
+    }
+    catch(error){
+      console.log(`uri : ${req.body.uri}`);
+      console.log(`Error in /api/file : ${error}`);
+      xml = `<?xml version="1.0" encoding="UTF-8" ?><NoXml>No XML</NoXml>`;
+      res.send({xml : xml});
+    }
+    
+      console.log("response sent");
+  });
+ 
+  
 export default router;

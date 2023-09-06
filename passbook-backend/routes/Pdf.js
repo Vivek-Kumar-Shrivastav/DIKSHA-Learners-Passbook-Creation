@@ -7,7 +7,7 @@ router.post("/", async(req, res)=>{
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url : `https://pdfobject.com/pdf/sample.pdf`, 
+      // url : `https://pdfobject.com/pdf/sample.pdf`, 
       url: `https://digilocker.meripehchaan.gov.in/public/oauth2/1/file/${req.body.uri}`,
       headers: { 
         'Authorization': `Bearer ${req.body.token}`,
@@ -19,13 +19,13 @@ router.post("/", async(req, res)=>{
     };
   
     axios(config)
-    .then((resp)=>
-    {    pdf = resp.data;
-         console.log(`............................GOT PDF  ${pdf}`);
-         res.send(pdf);
+    .then((pdf)=>
+    {  
+        //  console.log(`............................GOT PDF  ${pdf.data}`);
+         res.send(pdf.data);
     },(error)=>{
       console.log(`Error : ${error}`);
-      console.log(`Pdf : ${uri}`);
+      console.log(`Pdf : ${req.body.uri}`);
     });
   })
   

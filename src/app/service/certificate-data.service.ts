@@ -8,18 +8,22 @@ export class CertificateDataService {
   subjects : any;
   certificates: Subjects;
   constructor() { 
-
     //Try to use constructor of Subject interface to initialize this.certificate
-    this.certificates = {subjects : [], uri :'', certificateOf: '',};
+    this.certificates = {subjects : [], uri :'', certificateOf: '', rollNumber : ''};
   }
 
   getData(certificate : any){   // declare the type of certificate 
     let newCertificates : Subjects = Object.assign({}, this.certificates);
-    
+
     // certificateOf
     newCertificates.certificateOf = certificate.xml   
     ?.getElementsByTagName('Certificate')[0]
     ?.getAttribute('name')!;
+   
+    //EnrollmentNumber Or RollNumber
+    newCertificates.rollNumber = certificate.xml   
+    ?.getElementsByTagName('Certificate')[0]
+    ?.getAttribute('number')!;
 
     // URI
     newCertificates.uri = certificate.uri;  //blob
@@ -37,7 +41,7 @@ export class CertificateDataService {
     );
 
     // Data-Extraction
-    let sub: Subject = { name: '', marks: '' , gp: '' };
+    let sub: Subject = { name: '', marksObtained: '' , totalMarks : '', gp: '' };
 
     newCertificates.subjects = this.subjects.map((subject) => {
       let newSub = Object.assign({}, sub);
@@ -50,10 +54,16 @@ export class CertificateDataService {
       let marksTotal = marksMaxPractical + marksMaxTheory;
       if(marksTotal ==0) marksTotal = 100;
       // newSub.marks  = `${Math.floor(totalMarksObtained/marksTotal *100)}`;
-      newSub.marks  = `${totalMarksObtained}/${marksTotal }`;
+      newSub.marksObtained  = `${totalMarksObtained}`;
+      newSub.totalMarks  = `${marksTotal}`;
       newSub.gp = subject?.getAttribute('gp');
       if(newSub.gp !== ''){
-        newSub.marks = '';
+        newSub.marksObtained = '';
+        newSub.totalMarks = '';
+      }
+      if(newSub.gp == ""){
+          newSub.gp = `${Math.round(totalMarksObtained/marksTotal*10)}`;
+        newSub.gp = `${Math.round(totalMarksObtained/marksTotal*10)}`;
       }
       console.log(subject);
       return newSub;

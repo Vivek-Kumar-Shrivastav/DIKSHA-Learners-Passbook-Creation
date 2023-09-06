@@ -27,7 +27,8 @@ var corsOptions = {
     }
   }
 }
-//Authentication code Route
+
+//Authentication Code Route
 app.use("/api/authorise", authcoderoute);
 //Token Route
 app.use("/api/token", tokenroute);
@@ -44,57 +45,3 @@ app.listen(PORT, () => {
   console.log("App is listening on PORT", PORT);
 });
 
-// Cut-1
-
-//  await axios(configPdf)
-  // .then((resp)=>
-  // {   pdf = resp.data;
-  //      console.log(`............................GOT PDF  ${pdf}: ${count}`);
-  //      res.send([pdf, xml]);
-  //      let fileType  = `${resp}`.split(";")[0];
-  //     /*
-  //       let render = "blob";
-  //       if(fileType == "data:application/pdf"){
-  //         render = "base64";
-  //         console.log(`Type : ${render} `);
-  //       }
-  //       else{
-  //           console.log(`Type : ${render} `)
-  //       }
-  //       console.log(resp.headers);
-  //       var file = new Blob([resp.data], {type: 'application/pdf'}); 
-  //     */
-  //     // res.send(resp.data);
-  // },(error)=>{
-  //     console.log(`Error : ${error}`);
-  // });
-
-  // console.log(`...................response not sent : : ${count}`);
-  // count++;
-  // XML
-
-  // await axios(configXml)
-  // .then((resp)=>{
-  //     xml  = resp.data;
-  //     console.log(`..................GOT XML : ${xml} : ${count}`);
-  //   },(error)=>{
-  //     console.log(`Error : ${error}`);
-  //   });
-      
-
-  /*Cut-pdf-config*/
-
-   // let config = {
-  //   method: 'get',
-  //   maxBodyLength: Infinity,
-  //   url : `https://pdfobject.com/pdf/sample.pdf`, 
-  //   url: `https://digilocker.meripehchaan.gov.in/public/oauth2/1/file/${req.body.uri}`,
-  //   headers: { 
-  //     'Authorization': `Bearer ${req.body.token}`,
-  //      Accept : 'application/pdf',
-  //     'Content-Type': 'application/pdf',
-  //      mode : 'no-cors'
-  //   },
-  //   responseType : "arraybuffer",
-  // };
-  // console.log(config)

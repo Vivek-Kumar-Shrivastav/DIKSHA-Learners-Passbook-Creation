@@ -41,7 +41,7 @@ export class DlpComponent implements OnInit, OnChanges, OnDestroy {
     private _extractUserDetail: ExtractUserDetailService,
     private _certificateData: CertificateDataService
   ) {
-    this.certificates = { certificateOf: '', uri: '', subjects: [] };
+    this.certificates = { certificateOf: '', uri: '', subjects: [], rollNumber : '' };
     this.coCurricularActivities = [];
     this.extraCurricularActivities = [];
     this.curricularActivities = [];
@@ -95,7 +95,6 @@ export class DlpComponent implements OnInit, OnChanges, OnDestroy {
         if(certificateType == null || certificateType == undefined){
           continue;
           //skip this certificate, since it is not an Academic Record
-
           // You can ask the user if he/she wamnts to share the aadhar card or not and then make the required changes hare.
         }
         if (certificateType == 'SSCER') {

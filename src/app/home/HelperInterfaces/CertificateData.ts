@@ -1,11 +1,13 @@
 export  interface Subject{
     name : string;
-    marks : string;     
+    marksObtained : string; 
+    totalMarks : string;    
     gp : string;
 }
 // performance  => cgpa !=  blank => use gp; => else : use "%". 
-export  interface Subjects{
+export  interface Subjects{  // can be renamed to Certificate
     subjects : Subject[];
     uri : string; 
     certificateOf : string;
+    rollNumber: string;
 }

@@ -11,6 +11,7 @@ export class TableComponent {
   @Input() certificate;
   @Input() subjects;
   @Input() uri;
+  @Input() rollNumber;
 
   constructor(private http: HttpClient) {}
   async download() {
@@ -21,36 +22,39 @@ export class TableComponent {
         token: token,
       };
       // window.open(this.pdf, '_blank');
-      let observable  = await lastValueFrom(this.http.post<any>(
-          '/api/pdf',
-          body, 
-          { responseType: 'blob' as 'json',})
-        );
-        observable.subscribe({
-          next: async (res) => {
-            let pdf: string = res; // pdf-File
-            //  console.log(`pdf : ${pdf}, XML : ${xmlString}`);
+      let pdfResponse = await lastValueFrom(
+        this.http.post<any>('/api/pdf', body, {responseType: 'blob' as 'json'})
+      );
+      
+      pdfResponse.subscribe({
+        next: async (res) => {
+          let pdf: string = res; // pdf-File
+          //  console.log(`pdf : ${pdf}, XML : ${xmlString}`);
 
-            let fileType = `${res}`.split(';')[0];
-            let render = 'blob';
-            if (fileType == 'data:application/pdf') {
-              render = 'base64';
-              console.log(
-                `Render : ${render} and Rendering \n ${JSON.stringify(res)}`
-              );
-            } else {
-              console.log(
-                `Render : ${`${res}`.split('%')[1]} and Rendering \n ${res}`
-              );
-            }
+          let fileType = `${res}`.split(';')[0];
+          let render = 'blob';
+          if (fileType == 'data:application/pdf') {
+            render = 'base64';
+            console.log(
+              `Render : ${render} and Rendering \n ${JSON.stringify(res)}`
+            );
+          } else {
+            console.log(
+              `Render : ${`${res}`.split('%')[1]} and Rendering \n ${res}`
+            );
+          }
 
-            let blob = await this.processFileResponse(res, 'demonahihai.pdf', 'blob');
-            this.downloadFile(blob, "newFile.pdf");
-          },
-          error: (err) => {
-            console.log("Error in downloading pdf", err);
-          },
-        });
+          let blob = await this.processFileResponse(
+            res,
+            'demonahihai.pdf',
+            'blob'
+          );
+          this.downloadFile(blob, 'newFile.pdf');
+        },
+        error: (err) => {
+          console.log('Error in downloading pdf', err);
+        },
+      });
     } catch (err) {
       console.log('Erro received', err);
     }
@@ -84,7 +88,11 @@ export class TableComponent {
     // console.log(`Returning accesToken : ${accessToken}`);
     // return accessToken;
   }
-  processFileResponse(pdf: any, fileName: string, render: string) : Promise<Blob> {
+  processFileResponse(
+    pdf: any,
+    fileName: string,
+    render: string
+  ): Promise<Blob> {
     let blob: Blob;
     return new Promise<Blob>((resolve, reject) => {
       if (render === 'base64') {
@@ -99,11 +107,11 @@ export class TableComponent {
       resolve(blob);
     });
   }
-   downloadFile(blob: any, fileName: string) {
+  downloadFile(blob: any, fileName: string) {
     // Other Browsers
     const url = (window.URL || window.webkitURL).createObjectURL(blob);
     window.open(url, '_blank');
-    console.log("Downloading File...");
+    console.log('Downloading File...');
     // rewoke URL after 15 minutes    OR  Additionally, use can add the user(Accessor_) with grant he/she will always be able to access the docs
     // setTimeout(() => {
     //   window.URL.revokeObjectURL(url);

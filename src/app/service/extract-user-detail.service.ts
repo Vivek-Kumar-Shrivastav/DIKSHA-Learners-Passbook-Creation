@@ -16,20 +16,33 @@ export class ExtractUserDetailService {
     };
    }
   getDetails(xmlDoc : Document){
-    this.user.name = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('name')!;
+    if(this.user.name == "")
+    {
+      let name = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('name');
+      this.user.name = name == null ? "" : name;
+    }
 
-    this.user.fatherName = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('swd')!;
+     if(this.user.fatherName == "")
+      {  let fatherName = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('swd');
+        this.user.fatherName = fatherName == null ? "" : fatherName;
+      }
+      if(this.user.motherName  == ""){
+        let motherName = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('motherName');
+        this.user.motherName = motherName == null ? "" : motherName;
+      }
 
-    this.user.motherName = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('motherName')!;
+      if(this.user.gender  == ""){
+        let gender = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('gender');
+        this.user.gender = gender == null ? "" : gender;
+      }
 
-    this.user.gender = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('gender')!;
- // this.certificate.certificate  = xmlDoc.getElementsByTagName('Certificate')[0].getAttribute("type")!;
-// if(this.certificate.certificate == "HSCER"){}
+    ;
+   // if(this.certificate.certificate == "HSCER"){}
+    if(this.user.dob  == ""){
+      let dob = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('dob');
+      this.user.dob = dob == null ? "" : dob;
+    }
 
-  this.user.dob =xmlDoc.getElementsByTagName('Person')[0].getAttribute('dob') == undefined
-    ? ''
-    : xmlDoc.getElementsByTagName('Person')[0].getAttribute('dob')!;
-  
     return this.user;
   }
 
