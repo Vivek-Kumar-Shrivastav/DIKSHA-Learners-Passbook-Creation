@@ -5,9 +5,13 @@ The Learners Passbook will act as a digital passbook for access by relevant stak
 ## Development server
 The Tech Stack used for this project is Angular for the frontend and NodeJS for the backend. Along with that styling has been applied using Bootstrap and the different libraries used are mentioned below.
 
-## Frontend
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## Frontend
+
+### Setup
+1.To install the Angular CLI, open a terminal window and run the following command:
+npm install -g @angular/cli </br>
+2 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files..
 
 ### Folder Structure of frontend
      app
@@ -26,8 +30,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
     
 
 ## Backend
-The backend is built using NodeJs and ExpressJs
-Install the NodeJs library inorder to run backend service
+The backend is built using NodeJs and ExpressJs </br>
+Install the NodeJs library inorder to run backend service : [Download NodeJs](https://nodejs.org/en/download)
 
 ### Commands to run backend
 1. Change the current directory by using  : cd passbook-backend
@@ -39,8 +43,3 @@ Install the NodeJs library inorder to run backend service
                   
                    └──index.js
                    
-     
-
-
-   
-
