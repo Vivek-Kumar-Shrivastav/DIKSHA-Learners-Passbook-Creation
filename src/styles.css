@@ -1,1 +1,16 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+/* styles.css */
+/* styles.css */
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-image: url("F:\Users\hp\Projects\Node-Practice\DIKSHA-DLP\src\assets\images\tri-color-bg.png" ); /* Replace with the path to your image */
+    background-size: cover;
+     width: 100vw;
+     height: 100vh;
+    /* background-repeat: no-repeat; Prevent image repetition */
+  }
+  
+  
