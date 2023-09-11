@@ -20,7 +20,7 @@ import { SummariserComponent } from './summariser/summariser.component';
     DlpComponent,
     SummariserComponent,
   ],
-  imports: [CommonModule, FormsModule, FileSaverModule],
+  imports: [CommonModule, FormsModule, FileSaverModule, SummariserComponent],
   exports: [DlpComponent],
 })
 export class DLPModule {}
