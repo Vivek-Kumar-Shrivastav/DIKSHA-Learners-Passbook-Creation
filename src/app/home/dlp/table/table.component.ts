@@ -13,12 +13,13 @@ export class TableComponent {
   @Input() uri;
   @Input() rollNumber;
 
+
   constructor(private http: HttpClient) {}
   async download() {
     try {
       let token = await this.getToken();
       let body = {
-        uri: this.uri,
+        uri: this.uri, 
         token: token,
       };
       // window.open(this.pdf, '_blank');

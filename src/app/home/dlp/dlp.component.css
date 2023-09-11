@@ -4,6 +4,9 @@ h1{
 h2{
     font-size: 1.5rem;
 }
+body{
+    background-color: bisque;
+}
 
 #user-credentials > p > span {
     display: inline-block;

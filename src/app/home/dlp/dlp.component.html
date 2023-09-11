@@ -1,11 +1,11 @@
 <!-- <p>dlp works!</p> -->
-<!-- <button id="download" (click)="downloadDlp()" class="btn btn-primary text-right">Download</button> -->
 
 <!-- <button class="btn btn-primary m-2" (click)="printData()">Download</button>
-<button class="btn btn-primary m-2" (click)="getUserData()"> Get data</button> -->
-
-<div id="dlp">
-<app-user [user]="user"></app-user>
+  <button class="btn btn-primary m-2" (click)="getUserData()"> Get data</button> -->
+  
+  <div id="dlp">
+    <app-user [user]="user"></app-user>
+    <button id="table" (click)="isTable()" class="btn btn-primary text-right p-2">{{tableOrSummary}}</button>
 
    <div id="user-passbook" class="m-2">
     <h2 class="m-1 d-flex align-item-baseline justify-content-center">Digital Learner's Passbook</h2>
@@ -13,24 +13,22 @@
       <h3 class="text-center align-item-baseline">Co-Curricular</h3>
       
     </div>
+     <ng-container *ngIf="showTable" >
+         <ng-container  *ngFor= "let certificate of coCurricularActivities">
+           <app-co-curricular [certificate]= "certificate.certificateOf" [uri] = "certificate.uri" [subjects]= "certificate.subjects"  [rollNumber] = "certificate.rollNumber">
+           </app-co-curricular>
+         </ng-container>
+     </ng-container>
+     
+     <ng-container *ngIf="!showTable">
+       <ng-container  *ngFor = "let certificate of coCurricularActivities">
+            <p class="bg-info p-2 align-item-center m-2">{{certificate.certificateOf}}</p>
+         <app-summariser [certificate]= "certificate.certificateOf" [uri] = "certificate.uri" [subjects]= "certificate.subjects"  [rollNumber] = "certificate.rollNumber">
+         </app-summariser>
+       </ng-container>
+     </ng-container>
 
-    <!-- images -->
-
-    <!-- <ng-container *ngFor="let certificate of docsImg"> -->
-     <!-- <object data = "data"  width="800"
-     height="500"></object>
-
-     <h1>{{data}}</h1> -->
-    <!-- </ng-container>  -->
-    <!-- <h6 class="text-center p-2 bg-info">{{ certificate }}</h6> -->
-
-    <ng-container *ngFor= "let certificate of coCurricularActivities">
-      <app-co-curricular [certificate]= "certificate.certificateOf" [uri] = "certificate.uri" [subjects]= "certificate.subjects"  [rollNumber] = "certificate.rollNumber">
-      </app-co-curricular>
-    </ng-container>
-
-    <!-- <app-certificate></app-certificate>   
-    <app-extra-curricular> </app-extra-curricular> -->
+    <!-- <app-extra-curricular> </app-extra-curricular> -->
   </div>
 </div>
 

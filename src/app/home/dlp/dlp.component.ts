@@ -29,7 +29,8 @@ export class DlpComponent implements OnInit, OnChanges, OnDestroy {
     motherName: '',
     gender: '',
   };
-
+  showTable : boolean = true;
+  tableOrSummary : string = "Show Summary";
   certificates: Subjects;
   coCurricularActivities: Subjects[];
   extraCurricularActivities: any = [];
@@ -59,8 +60,13 @@ export class DlpComponent implements OnInit, OnChanges, OnDestroy {
     localStorage.clear();
   }
 
-  downloadDlp() {
-    const dlp = document.getElementById('download');
+  isTable() {
+    this.showTable = !this.showTable;
+    if(this.showTable == true){
+       this.tableOrSummary = "Show Summary";
+    }else{
+      this.tableOrSummary = "Show Table;"
+    }
   }
   // getUserData() {
   //   return (this.data = this._userDataService.getData());
@@ -72,10 +78,6 @@ export class DlpComponent implements OnInit, OnChanges, OnDestroy {
 
   async getDataFromLocalStorage() {
     for (let fileNum = 0; fileNum < localStorage.length; fileNum++) {
-      // Use it to turn your xmlString into an XMLDocument
-      // File[index] will have two things pdf : ".blob" and xml : ".xml";
-      //  console.log(`File ${fileNum}: ${this.data}`);
-      
       let file;
       try {
         file = await JSON.parse(this._userDataService.getData(fileNum));
@@ -83,8 +85,7 @@ export class DlpComponent implements OnInit, OnChanges, OnDestroy {
          if("no-data" in file) {
           continue;
          }
-        // let pdf = this.data[0];
-        // window.open(pdf, '_blank');
+
         let parser = new DOMParser();
         let xml = parser.parseFromString(file.xml, 'text/xml'); // will not give an error
 

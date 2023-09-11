@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { DlpComponent } from './dlp.component';
 import { ExtraCurricularComponent } from './extra-curricular/extra-curricular.component';
 import { FileSaverModule } from 'ngx-filesaver';
+import { SummariserComponent } from './summariser/summariser.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FileSaverModule } from 'ngx-filesaver';
     ExtraCurricularComponent,
     TableComponent,
     DlpComponent,
+    SummariserComponent,
   ],
   imports: [CommonModule, FormsModule, FileSaverModule],
   exports: [DlpComponent],

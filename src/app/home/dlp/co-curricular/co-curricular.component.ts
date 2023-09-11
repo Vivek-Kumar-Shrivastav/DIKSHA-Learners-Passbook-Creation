@@ -11,4 +11,5 @@ export class CoCurricularComponent {
   @Input() subjects : Subject[] = [];
   @Input() uri : string ="";
   @Input() rollNumber : string = "";
+  // haha  = "Hahaha";
 }
