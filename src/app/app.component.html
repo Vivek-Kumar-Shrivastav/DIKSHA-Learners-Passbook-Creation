@@ -1,20 +1,32 @@
-<nav style="display: flex; justify-content: space-between; background-color: rgb(208, 209, 236); padding: 15px; height: 12vh;">
+<nav class = "nav">
   <div>
-    <a routerLink="/" routerLinkActive="active" >
-      <div id="home-diksha" class="d-flex m-2">
-       <img id= "home-logo"  src = "https://diksha.gov.in/assets/imgs/logos.svg"  alt= "DIKSHA" />
+    <a routerLink="/home" routerLinkActive="active" >
+      <div id="home-diksha" class="d-flex ">
+       <img id= "logo"  src = "https://diksha.gov.in/assets/imgs/logos.svg"  alt= "DIKSHA" />
        <span id="home-title-about" >
         <div class = "home-title" id ="home-title-title" class="">Digital Infrastructure for knowledge Sharing</div>
-        <div class = "home-title" id="home-title-about" >Ministry of Electronics and Information Technology</div>
+        <div class = "home-title" id="home-about" >Ministry of Electronics and Information Technology</div>
        </span>
       </div>
     </a>
   </div>
-  <div  class="m-2">
-    <img id= "digital-india-logo" src = "https://drive.google.com/uc?export=view&id=1oeEQgu4rm0ruLQKRwueO2RY7WJhsjD2o" alt= "Digital-India" />
-    <!-- <a routerLink="/signin" routerLinkActive="active" >SignIn</a>
-    <a routerLink="/cart" routerLinkActive="active" >Cart</a> -->
-  </div>
+  <!--  checkbox to control the icon's state    -->
+  <input id="menu-toggle" type="checkbox" />
+  <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+  <!--  main menu    -->
+  <ul class="menu">
+    <li><a routerLink="/signin" routerLinkActive="active" >SignIn</a></li>
+    <li><a routerLink="/DLP" routerLinkActive="active" >DLP</a></li>
+    <li>About</li>
+    <li>Contact</li>
+</ul>
+  <!-- <div  class="m-2">
+    <img id= "logo" src = "https://drive.google.com/uc?export=view&id=1oeEQgu4rm0ruLQKRwueO2RY7WJhsjD2o" alt= "Digital-India" />
+  </div> 
+-->
+<!-- <a routerLink="/cart" routerLinkActive="active" >Cart</a> -->
 </nav>
 
 <!-- <app-register></app-register> -->

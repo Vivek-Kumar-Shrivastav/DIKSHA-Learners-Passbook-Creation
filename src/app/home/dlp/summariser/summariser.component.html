@@ -1,0 +1,19 @@
+<table class ="table">
+    <tr>
+        <th>Category</th>
+        <th>Marks Obtained</th>
+        <th>Max Marks</th>
+        <th>Performance</th>
+    </tr>
+  <tr class="border border-primary bg-warning" *ngFor="let category of summaryReport">
+      <ng-container *ngFor="let field of category">
+        <td>
+            {{field | titlecase}}
+        </td>
+      </ng-container>
+    
+  </tr>
+</table>
+{{ passbook }}
+
+<!-- {{summaryReport }} -->

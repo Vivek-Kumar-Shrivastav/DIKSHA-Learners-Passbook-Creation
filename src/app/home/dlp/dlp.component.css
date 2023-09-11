@@ -1,24 +1,11 @@
-
 h1{
     font-size: 2rem;
 }
-
 h2{
     font-size: 1.5rem;
 }
-#user-detail{
-    display: flex;
-    width: 70vw;
-    padding: .25rem .5rem;
-    border: 1px solid rgb(172, 184, 211);
-    align-items: center;
-
-    /* margin: 1rem; */
-}
-
-th, tr{
-    width: 15vw !important;
-    padding-left: 1rem;
+body{
+    background-color: bisque;
 }
 
 #user-credentials > p > span {
