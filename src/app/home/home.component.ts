@@ -55,9 +55,8 @@ export class HomeComponent {
             console.log(`Body : ${body}`);
 
             this.getToken();
-           
+
             console.log(`Going to fetch the details and Token = ${this.token}`);
-            
           }
         }
       }, 1000);
@@ -66,7 +65,11 @@ export class HomeComponent {
 
   // Helper functions
 
-  processFileResponse(pdf: any, fileName: string, render: string): Promise<Blob> {
+  processFileResponse(
+    pdf: any,
+    fileName: string,
+    render: string
+  ): Promise<Blob> {
     let blob: Blob;
     return new Promise<Blob>((resolve, reject) => {
       if (render === 'base64') {
@@ -166,14 +169,11 @@ export class HomeComponent {
         console.error(`Files not loaded!!!`);
       },
     });
-
-    
   }
   async storeFile() {
     console.log('Inside storeFile');
     const urlXml = 'http://localhost:5000/api/file';
     for (let fileNum = 2; fileNum < this.files.length; fileNum++) {
-      
       let body = {
         token: this.token,
         uri: this.files[fileNum].uri,
@@ -182,61 +182,55 @@ export class HomeComponent {
       console.log(`URI-${fileNum}: ${this.files[fileNum].uri}`);
       console.time(`${fileNum}`);
 
-      
-       this.http.post<any>(urlXml, body, { responseType: 'json' })
-      .subscribe(async (res) => {
-        let xmlFile: string = res.xml; // xml-File
-      
+      this.http
+        .post<any>(urlXml, body, { responseType: 'json' })
+        .subscribe(async (res) => {
+          let xmlFile: string = res.xml; // xml-File
 
-        var parser = new DOMParser();
-        var xml = parser.parseFromString(xmlFile, 'text/xml');
+          var parser = new DOMParser();
+          var xml = parser.parseFromString(xmlFile, 'text/xml');
 
-        let data = JSON.stringify({ uri: body.uri, xml: xmlFile }); // [uri, xml]
-      
-        this._userDataService.updateData(fileNum, data);
-        this.studentData.push(this._userDataService.getData(fileNum));
-        // console.log(this._userDataService.getData(fileNum));
+          let data = JSON.stringify({ uri: body.uri, xml: xmlFile }); // [uri, xml]
 
-        let isNoXml =
-          xml.getElementsByTagName('NoXml')[0]?.childNodes[0]?.nodeValue;
-        console.log(
-          `NoXml : ${
-            xml.getElementsByTagName('NoXml')[0]?.childNodes[0]?.nodeValue
-          }`
-        );
-      
-      });
+          this._userDataService.updateData(fileNum, data);
+          this.studentData.push(this._userDataService.getData(fileNum));
+          // console.log(this._userDataService.getData(fileNum));
+
+          let isNoXml =
+            xml.getElementsByTagName('NoXml')[0]?.childNodes[0]?.nodeValue;
+          console.log(
+            `NoXml : ${
+              xml.getElementsByTagName('NoXml')[0]?.childNodes[0]?.nodeValue
+            }`
+          );
+        });
     }
 
+    //For-PDF
 
-    const urlPdf = 'http://localhost:5000/api/pdf';
-    for (let fileNum = 0; fileNum < this.files.length; fileNum++) {
-  
-      let body = {
-        token: this.token,
-        uri: this.files[fileNum].uri,
-      };
-      console.log(`Token : ${this.token}`);
-      console.log(`URI-${fileNum}: ${this.files[fileNum].uri}`);
-      console.time(`${fileNum}`);
+    // const urlPdf = 'http://localhost:5000/api/pdf';
+    // for (let fileNum = 0; fileNum < this.files.length; fileNum++) {
 
-       this.http.post<any>(urlPdf, body, { responseType: "blob" as 'json' })
-      .subscribe(async (res) => {
-          let pdfFile = res;
-       
-            let blob = await this.processFileResponse(
-                pdfFile,
-              'demonahihai.pdf',
-              'blob'
-            );
-            await  this.downloadFile(blob, 'newFile.pdf');
-         
+    //   let body = {
+    //     token: this.token,
+    //     uri: this.files[fileNum].uri,
+    //   };
+    //   console.log(`Token : ${this.token}`);
+    //   console.log(`URI-${fileNum}: ${this.files[fileNum].uri}`);
+    //   console.time(`${fileNum}`);
 
-      });
-    }
-  }  
+    //    this.http.post<any>(urlPdf, body, { responseType: "blob" as 'json' })
+    //   .subscribe(async (res) => {
+    //       let pdfFile = res;
+
+    //         let blob = await this.processFileResponse(
+    //             pdfFile,
+    //           'demonahihai.pdf',
+    //           'blob'
+    //         );
+    //         await  this.downloadFile(blob, 'newFile.pdf');
+
+    //   });
+    // }
+  }
 }
-
-
-
-

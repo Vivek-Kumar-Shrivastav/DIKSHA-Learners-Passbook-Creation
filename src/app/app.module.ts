@@ -12,12 +12,12 @@ import { DLPModule } from './home/dlp/dlp.module';
 import { DlpComponent } from './home/dlp/dlp.component';
 import { HomeComponent } from './home/home.component';
 import { UserDataService } from './service/user-data.service';
-import { ExamplePdfViewerComponent } from './example-pdf-viewer/example-pdf-viewer.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 
+
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ExamplePdfViewerComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

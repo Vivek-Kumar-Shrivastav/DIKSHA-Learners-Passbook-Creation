@@ -58,8 +58,8 @@ export class CertificateDataService {
       newSub.totalMarks  = `${marksTotal}`;
       newSub.gp = subject?.getAttribute('gp');
       if(newSub.gp !== ''){
-        newSub.marksObtained = '';
-        newSub.totalMarks = '';
+        newSub.marksObtained = `${+newSub.gp*10}`;
+        newSub.totalMarks = "100";
       }
       if(newSub.gp == ""){
           newSub.gp = `${Math.round(totalMarksObtained/marksTotal*10)}`;
