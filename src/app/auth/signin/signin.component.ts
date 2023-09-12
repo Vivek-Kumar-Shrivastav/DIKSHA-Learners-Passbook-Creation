@@ -14,7 +14,5 @@ export class SigninComponent {
   signIn(form : NgForm){
     console.log("Signned In: ",form.form.value);
   }
-  getEmail(){
-
-  }
+  getEmail(){}
 }

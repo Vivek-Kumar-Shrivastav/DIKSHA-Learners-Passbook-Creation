@@ -18,7 +18,7 @@ body{
   font-weight: bolder;
 }
 .logo {
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   height: 6vh !important;
   width: auto;
   max-height: 50px !important;
@@ -29,37 +29,40 @@ a {
   text-decoration: none;
 }
 
-.home-title {
+#home-title {
   color: rgb(40, 39, 39);
-  font-weight: normal;
-}
-
-#home-title-title {
   font-size: 1rem;
+  
 }
-
-#home-title-about {
+#home-about{
   font-size: 0.8rem;
 }
+.home-logo{
+  margin-left: 1rem;
+}
+
 
 .menu li:hover {
-  color: white;
+  /* color: white; */
   cursor: pointer;
-  background-color: rgba(157, 209, 248, 0.884);
+  font-size : 20px;
+  /* background-color: rgba(157, 209, 248, 0.884); */
 }
 
 .menu {
   display: flex;
   flex-direction: row;
+  align-items: center;
   list-style-type: none;
   /* margin: 15px 0; */
   padding: 0;
 }
 
-.menu > li {
+.menu li {
   margin: 0 1rem;
   overflow: hidden;
   font-size: 16px;
+  transition: font-size 0.1s ease;
 }
 /*Container for menu button  */
 .menu-button-container {

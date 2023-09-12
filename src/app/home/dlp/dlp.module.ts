@@ -9,6 +9,7 @@ import { DlpComponent } from './dlp.component';
 import { ExtraCurricularComponent } from './extra-curricular/extra-curricular.component';
 import { FileSaverModule } from 'ngx-filesaver';
 import { SummariserComponent } from './summariser/summariser.component';
+import { SummariserService } from './summariser/summariser.service';
 
 @NgModule({
   declarations: [
@@ -22,5 +23,6 @@ import { SummariserComponent } from './summariser/summariser.component';
   ],
   imports: [CommonModule, FormsModule, FileSaverModule, SummariserComponent],
   exports: [DlpComponent],
+  providers: [SummariserService]
 })
 export class DLPModule {}
