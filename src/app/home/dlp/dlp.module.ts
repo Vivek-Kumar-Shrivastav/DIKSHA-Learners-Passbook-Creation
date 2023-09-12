@@ -21,7 +21,7 @@ import { SummariserService } from './summariser/summariser.service';
     DlpComponent,
     SummariserComponent,
   ],
-  imports: [CommonModule, FormsModule, FileSaverModule, SummariserComponent],
+  imports: [CommonModule, FormsModule, FileSaverModule],
   exports: [DlpComponent],
   providers: [SummariserService]
 })
