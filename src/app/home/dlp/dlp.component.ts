@@ -7,10 +7,9 @@ import {
 } from '@angular/core';
 
 import { UserDataService } from '../../service/user-data.service';
-import { Credentials } from '../HelperInterfaces/Credendials';
-import { Subject, Subjects } from '../HelperInterfaces/CertificateData';
-import { ExtractUserDetailService } from 'src/app/service/extract-user-detail.service';
-import { CertificateDataService } from 'src/app/service/certificate-data.service';
+import { Credentials } from '../../../HelperInterfaces/Credendials';
+import { Certificate } from '../../../HelperInterfaces/CertificateData';
+import { DataBaseService } from '../../service/data-base.service';
 
 @Component({
   selector: 'app-dlp',
@@ -29,92 +28,51 @@ export class DlpComponent implements OnInit, OnChanges, OnDestroy {
     motherName: '',
     gender: '',
   };
-  showTable : boolean = true;
-  tableOrSummary : string = "Show Summary";
-  certificates: Subjects;
-  coCurricularActivities: Subjects[];
+  showTable: boolean = true;
+  tableOrSummary: string = 'Show Summary';
+  certificate: Certificate;
+  coCurricularActivities: Certificate[];
   extraCurricularActivities: any = [];
   curricularActivities: any = [];
-  docsImg: Array<string> = [];
 
   constructor(
     private _userDataService: UserDataService,
-    private _extractUserDetail: ExtractUserDetailService,
-    private _certificateData: CertificateDataService
+    private _dataBase: DataBaseService
   ) {
-    this.certificates = { certificateOf: '', uri: '', subjects: [], rollNumber : '' };
+    this.certificate = {
+      certificateOf: '',
+      uri: '',
+      subjects: [],
+      rollNumber: '',
+    };
     this.coCurricularActivities = [];
     this.extraCurricularActivities = [];
     this.curricularActivities = [];
   }
 
   async ngOnInit() {
-    await this.getDataFromLocalStorage();
+    await this._dataBase.getDataFromLocalStorage(
+      this.user,
+      this.coCurricularActivities
+    );
   }
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes);
-    // this.data=  this._userDataService.getData();
   }
   ngOnDestroy(): void {
-    alert(localStorage.getItem('0'));
-    localStorage.clear();
+    // localStorage.clear();
   }
 
   isTable() {
     this.showTable = !this.showTable;
-    if(this.showTable == true){
-       this.tableOrSummary = "Show Summary";
-    }else{
-      this.tableOrSummary = "Show Table;"
+    if (this.showTable == true) {
+      this.tableOrSummary = 'Show Summary';
+    } else {
+      this.tableOrSummary = 'Show Table;';
     }
   }
-  // getUserData() {
-  //   return (this.data = this._userDataService.getData());
-  // }
 
   printData() {
     this._userDataService.printData();
-  }
-
-  async getDataFromLocalStorage() {
-    for (let fileNum = 0; fileNum < localStorage.length; fileNum++) {
-      let file;
-      try {
-        file = await JSON.parse(this._userDataService.getData(fileNum));
-        
-         if("no-data" in file) {
-          continue;
-         }
-
-        let parser = new DOMParser();
-        let xml = parser.parseFromString(file.xml, 'text/xml'); // will not give an error
-
-        //User-Details
-        let certificateType = xml?.getElementsByTagName('Certificate')[0]?.getAttribute('type');
-
-        console.log("CertificateType :",certificateType);
-        if(certificateType == null || certificateType == undefined){
-          continue;
-          //skip this certificate, since it is not an Academic Record
-          // You can ask the user if he/she wamnts to share the aadhar card or not and then make the required changes hare.
-        }
-        if (certificateType == 'SSCER') {
-          this.user = this._extractUserDetail.getDetails(xml);
-          console.log(this.user);
-        }
-        // Certificate Details
-        let newCertificates: Subjects = this._certificateData.getData({
-          uri: file.uri,
-          xml: xml,
-        });
-        console.log(`NewCertis : ${newCertificates}`);
-
-        //Add uri to later extract pdf
-        this.coCurricularActivities.push(newCertificates);
-      } catch (err) {
-        console.log('Error in getting dat from localStorage', err);
-        continue;
-      }
-    }
   }
 }
