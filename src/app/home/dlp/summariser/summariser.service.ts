@@ -3,6 +3,7 @@ import { Subject } from '../../../../HelperInterfaces/CertificateData'
 import { SubjectPerformanceCard } from 'src/HelperInterfaces/SubjectPerformanceCard';
 import { CategoryPerformanceCard } from 'src/HelperInterfaces/CategoryPerformanceCard';
 import { PerformanceCard } from 'src/HelperInterfaces/PerformanceCard';
+import { retry } from 'rxjs';
 
 @Injectable()
 
@@ -10,9 +11,10 @@ export class SummariserService {
   constructor() { }
 
   // Final Report Card
-  summaryReport: string[][] = [[]];
+  private summaryReport: string[][] = [[]];
+  private ReportCard :string[][][]= [[[]]];
   // Category wise subjects List
-  schoolSubjects = {
+  private schoolSubjects = {
     math: ['math'],
     science: ['science', 'bio', 'chemi', 'physic', 'science'],
     commerce: ['accountancy', 'business', 'economics'],
@@ -79,8 +81,9 @@ export class SummariserService {
       'bahasa melayu',
     ],
   };
+
   //Competency Level
-  strength: Object = {
+  private strength: Object = {
     10: 'Exceptional',
     9: 'phenomenal',
     8: 'excellent',
@@ -88,8 +91,9 @@ export class SummariserService {
     6: 'hardWorking',
     other: 'persevering',
   };
+
   // Caculates the competency of student in given subject/category
-  giveStrength(marksObtained: number, totalMarks: number): Promise<string> {
+  private giveStrength(marksObtained: number, totalMarks: number): Promise<string> {
     return new Promise((resolve, reject) => {
       let calaulatedStrength = 'persevering';
       let percentage = `${Math.floor(
@@ -102,7 +106,8 @@ export class SummariserService {
     });
   }
 
-  async process(subjects: Subject[]) : Promise<Array<Array<string>>> {
+  // Generates & returns the summary 
+  async summarise(subjects: Subject[]) : Promise<Array<Array<string>>> {
     return new Promise(async (resolve, reject) => {
       let category: number = 0;
       for (let subjectCategory in this.schoolSubjects) {
@@ -156,11 +161,10 @@ export class SummariserService {
         }
         
         //Check if any subject falls into current CategoryPerformanceCard of SubjectPerformanceCard
-  
         if (categoryReport.categoryPerformanceCard.obtained != 0) {
-          let finalReport = `Student has obtained ${categoryPerformance.obtained} marks out of ${categoryPerformance.max} and shown ${categoryPerformance.strength} nature in field of ${subjectCategory}`;
+          // let finalReport = `Student has obtained ${categoryPerformance.obtained} marks out of ${categoryPerformance.max} and shown ${categoryPerformance.strength} nature in field of ${subjectCategory}`;
           this.summaryReport[category++] = [
-            'CategoryPerformanceCard ' + subjectCategory,
+             subjectCategory,
             `${categoryPerformance.obtained}`,
             `${categoryPerformance.max}`,
             `${categoryPerformance.strength}`,
@@ -168,7 +172,16 @@ export class SummariserService {
         }
       }
       // return this.summaryReport;
+      this.ReportCard.push(this.summaryReport);
       resolve(this.summaryReport);
+    })
+  }
+
+  // Returns the summary 
+  getSummary(): Promise<string[][][]>{
+    return new Promise((resolve) => {
+      if(this.summaryReport[0][0] != undefined)
+      resolve(this.ReportCard);
     })
   }
 }

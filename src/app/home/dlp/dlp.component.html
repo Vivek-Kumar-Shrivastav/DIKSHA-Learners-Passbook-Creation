@@ -1,22 +1,38 @@
-<!-- <p>dlp works!</p> -->
-
-<!-- <button class="btn btn-primary m-2" (click)="printData()">Download</button>
-  <button class="btn btn-primary m-2" (click)="getUserData()"> Get data</button> -->
+<button class="btn btn-primary m-2" (click)="generatePDF()">Download</button>
+  <!-- <button class="btn btn-primary m-2" (click)="getUserData()"> Get data</button> -->
 
 <div id="dlp">
   <app-user [user]="user"></app-user>
-  <button id="table" (click)="isTable()" class="btn btn-primary text-right p-2">
-    {{ tableOrSummary }}
-  </button>
+  <div class = "components d-flex align-item-center justify-content-center m-2 p-2">
+    <button id="table" (click)="onClick('docs')" class="btn btn-primary text-right m-2 p-2">
+       Select Documents
+    </button>
+    <button id="table" (click)="onClick('table')" class="btn btn-primary text-right m-2 p-2" [disabled]="!docsSelected">
+      Table
+    </button>
+    <button id="table" (click)="onClick('summary')" class="btn btn-primary text-right m-2 p-2" [disabled]="!docsSelected">
+      Summary 
+    </button>
+  </div>
 
   <div id="user-passbook" class="m-2">
     <h2 class="m-1 d-flex align-item-baseline justify-content-center">
       Digital Learner's Passbook
     </h2>
     <div class="d-flex justify-content-center bg-warning">
-      <h3 class="text-center align-item-baseline">Co-Curricular</h3>
+      <h3 *ngIf="!showTable && !showSummary" class="p-3 align-item-baseline"></h3>
     </div>
-    <ng-container *ngIf="showTable">
+    <div class="d-flex justify-content-center bg-warning">
+      <h3 *ngIf="showTable || showSummary" class="text-center align-item-baseline">Co-Curricular</h3>
+    </div>
+
+    <!-- Child-1 -->
+    <ng-container *ngIf = "showDocs">
+      <app-select-docs (commandEvent)="showData($event)"></app-select-docs>
+    </ng-container>
+
+    <!-- Child-2 -->
+    <ng-container *ngIf = "showTable">
       <ng-container *ngFor="let certificate of coCurricularActivities">
         <app-co-curricular
           [certificate]="certificate.certificateOf"
@@ -28,11 +44,10 @@
       </ng-container>
     </ng-container>
 
-    <ng-container *ngIf="!showTable">
+    <!-- Child-3 -->
+    <ng-container *ngIf = "showSummary">
       <ng-container *ngFor="let certificate of coCurricularActivities">
-        <p class="bg-info p-2 justify-content-center align-item-center m-2">
-          {{ certificate.certificateOf }}
-        </p>
+        
         <app-summariser
           [certificate]="certificate.certificateOf"
           [uri]="certificate.uri"

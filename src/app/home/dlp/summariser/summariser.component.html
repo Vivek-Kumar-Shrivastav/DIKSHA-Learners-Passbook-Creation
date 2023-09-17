@@ -1,11 +1,21 @@
+<div class="d-flex justify-content-around">
+  <p class="bg-info p-2 justify-content-center align-item-center m-2">
+    <strong>{{ certificate}}</strong>
+  </p>
+  <p class="bg-info p-2 justify-content-center align-item-center m-2">
+     <span class="m-2"> Roll Number : </span> {{ rollNumber }}
+  </p>
+</div>
 <table class ="table">
+  <thead>
     <tr>
         <th>Category</th>
         <th>Marks Obtained</th>
         <th>Max Marks</th>
         <th>Performance</th>
     </tr>
-  <tr class="border border-primary bg-warning" *ngFor="let category of summaryReport">
+  </thead>
+  <tr class="border border-primary bg-warning" *ngFor="let category of summaryReport; let ind = index">
       <ng-container *ngFor="let field of category">
         <td>
             {{field | titlecase}}

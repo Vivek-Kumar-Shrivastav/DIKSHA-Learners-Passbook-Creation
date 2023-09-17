@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserDetailService } from './user-detail.service';
+import { DownloadAsPdfService } from './download-as-pdf.service';
 
-describe('UserDetailService', () => {
-  let service: UserDetailService;
+describe('DownloadAsPdfService', () => {
+  let service: DownloadAsPdfService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UserDetailService);
+    service = TestBed.inject(DownloadAsPdfService);
   });
 
   it('should be created', () => {

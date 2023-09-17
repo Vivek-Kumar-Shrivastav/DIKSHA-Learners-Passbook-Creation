@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, resolveForwardRef } from '@angular/core';
 import { Credentials } from '../../HelperInterfaces/Credendials';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExtractUserDetailService {
-  user: Credentials;
+  private user: Credentials;
   constructor() {
     this.user = {
       name: '',
@@ -15,38 +15,56 @@ export class ExtractUserDetailService {
       gender: '',
     };
   }
-  getDetails(xmlDoc: Document) {
-    if (this.user.name == '') {
+  extractDetails(xmlDoc: Document, user : Credentials) {
+    if (user.name == '') {
       let name = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('name');
-      this.user.name = name == null ? '' : name;
+      user.name = name == null ? '' : name;
     }
 
-    if (this.user.fatherName == '') {
+    if (user.fatherName == '') {
       let fatherName = xmlDoc
         .getElementsByTagName('Person')[0]
         ?.getAttribute('swd');
-      this.user.fatherName = fatherName == null ? '' : fatherName;
+      user.fatherName = fatherName == null ? '' : fatherName;
     }
-    if (this.user.motherName == '') {
+    if (user.motherName == '') {
       let motherName = xmlDoc
         .getElementsByTagName('Person')[0]
         ?.getAttribute('motherName');
-      this.user.motherName = motherName == null ? '' : motherName;
+      user.motherName = motherName == null ? '' : motherName;
     }
 
-    if (this.user.gender == '') {
+    if (user.gender == '') {
       let gender = xmlDoc
         .getElementsByTagName('Person')[0]
         ?.getAttribute('gender');
-      this.user.gender = gender == null ? '' : gender;
+      user.gender = gender == null ? '' : gender;
+      gender = user.gender;
+      
+      if(gender != '' &&  gender.toLowerCase()[0] == 'm')
+          user.gender = 'Male';
+      else if(gender != '' &&  gender.toLowerCase()[0] == 'f')
+          user.gender = 'Female';
+      else {
+          user.gender = 'Unknown';
+      }
+     
     }
 
     // if(this.certificate.certificate == "HSCER"){}
-    if (this.user.dob == '') {
+    if (user.dob == '') {
       let dob = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('dob');
-      this.user.dob = dob == null ? '' : dob;
+      user.dob = dob == null ? '' : dob;
     }
-
-    return this.user;
+    this.user = user;
+    return user;
+  }
+  
+  getDetails() : Promise<Credentials>{
+  return new Promise((resolve) =>{
+       if(this.user.name !== ''){
+        resolve(this.user);
+       }
+  })
   }
 }

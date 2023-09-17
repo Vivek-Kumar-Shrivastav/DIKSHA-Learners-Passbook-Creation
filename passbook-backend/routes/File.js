@@ -24,14 +24,14 @@ router.post("/", async (req, res) => {
      
       xml = await axios(configXml)
       
-      console.log(`uri : ${req.body.uri} and xml is : ${xml.data}`);
+      console.log(`Have uri : ${req.body.uri}`);
 
       res.send({xml : `${xml.data}`}) ;
     }
     catch(error){
-      console.log(`uri : ${req.body.uri}`);
+      console.log(`No-XML uri : ${req.body.uri}`);
       console.log(`Error in /api/file : ${error}`);
-      xml = `<?xml version="1.0" encoding="UTF-8" ?><NoXml>No XML</NoXml>`;
+      xml = `<?xml version="1.0" encoding="UTF-8" ?><NoXml>no-xml</NoXml>`;
       res.send({xml : xml});
     }
     
