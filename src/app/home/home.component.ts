@@ -2,7 +2,6 @@ import { Component , OnInit, OnDestroy} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GetAuthorisatonService } from '../service/get-authorisaton.service';
 import { UserDataService } from '../service/user-data.service';
-import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +20,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _authorize: GetAuthorisatonService,
     private http: HttpClient,
     private _userDataService: UserDataService,
-    private _homeComponentService : HomeService
   ) {}
   
   ngOnInit(): void {
@@ -165,8 +163,6 @@ export class HomeComponent implements OnInit, OnDestroy {
      this.http.post<any>(filesURL, body).subscribe({
       next:  (files) => {
         console.log(`Files Length : ${files.items.length}`);
-        this._homeComponentService.name.next("Gagan");
-        this._homeComponentService.name.complete();
         console.log(`File items : ${files.items[0].uri}`)
         this.files = files.items;
         this.flag = true;

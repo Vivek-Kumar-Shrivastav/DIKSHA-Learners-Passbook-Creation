@@ -1,7 +1,5 @@
 import { Component, OnInit, EventEmitter, Output} from '@angular/core';
-import { Subscription } from 'rxjs';
 import { DataBaseService } from 'src/app/service/data-base.service';
-import { HomeService } from '../../home.service';
 
 interface file{
   index: number;
