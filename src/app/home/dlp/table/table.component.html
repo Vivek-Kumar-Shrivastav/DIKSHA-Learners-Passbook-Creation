@@ -1,14 +1,13 @@
-<div class="d-flex" >
-  <h6 class="text-center m-2 bg-info d-flex justify-content-around align-item-baseline" style ="width: 100%;">{{ certificate  }} <span >Rollnumber : {{rollNumber}}</span><img src ="../../../../assets/images/download.png" alt = "download" id ="download" class = "btn justify-content-end" style="height : 3rem;" /></h6>
+<div class = "report-card">
+  <h6 class="heading  m-2 p-2 bg-info" >{{ certificate  }} <span >Rollnumber : {{rollNumber}}</span></h6>
 </div>
-<table id="course" class="table table-striped">
+<div id="course" class="report-card table table-striped">
   <thead>
     <tr>
-      <th>Sr.</th>
-      <th>Subject</th>
-      <th>MarksObtained</th>
-      <th>Competency</th>
-      <th>Strength</th>
+      <th class=" col-12">Subject</th>
+      <th class=" col-12">MarksObtained</th>
+      <th class=" col-12">Competency</th>
+      <th class=" col-12">Strength</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +16,6 @@
         > -->
     <ng-container *ngFor="let course of subjects; let currIndex = index">
       <tr>
-        <td>{{ currIndex + 1 }}</td>
         <td>{{ course.name }}</td>
         <td>{{ course.marksObtained }}</td>
         <td>{{ course.gp  }}</td>
@@ -25,4 +23,4 @@
       </tr>
     </ng-container>
   </tbody>
-</table>
+</div>

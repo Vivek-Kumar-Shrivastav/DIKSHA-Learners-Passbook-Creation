@@ -8,9 +8,8 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   // {path: "", component: AppComponent},
-  { path: '', component: RegisterComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'DLP', component: DlpComponent },
+  { path: '', component: HomeComponent },
+  { path: 'DLP', component: DlpComponent},
   { path: 'signin', component: SigninComponent },
 ];
 

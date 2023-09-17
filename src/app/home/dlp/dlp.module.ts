@@ -10,6 +10,7 @@ import { ExtraCurricularComponent } from './extra-curricular/extra-curricular.co
 import { FileSaverModule } from 'ngx-filesaver';
 import { SummariserComponent } from './summariser/summariser.component';
 import { SummariserService } from './summariser/summariser.service';
+import { SelectDocsComponent } from './select-docs/select-docs.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SummariserService } from './summariser/summariser.service';
     TableComponent,
     DlpComponent,
     SummariserComponent,
+    SelectDocsComponent,
   ],
   imports: [CommonModule, FormsModule, FileSaverModule],
   exports: [DlpComponent],

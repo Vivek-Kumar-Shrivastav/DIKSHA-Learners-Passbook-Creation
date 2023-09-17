@@ -25,6 +25,7 @@
     "ngx-extended-pdf-viewer": "^18.0.0-beta.4",
     "ngx-filesaver": "^16.0.0",
     "pdfjs-dist": "^3.9.179",
+    "pdfmake": "^0.2.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "xml-js": "^1.6.11",

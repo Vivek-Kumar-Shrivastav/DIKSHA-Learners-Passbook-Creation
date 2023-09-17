@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Subject } from '../../../../HelperInterfaces/CertificateData';
 import { SummariserService } from './summariser.service';
+import { DownloadAsPdfService } from 'src/app/service/download-as-pdf.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class SummariserComponent implements OnInit, OnChanges {
   @Input() subjects: Subject[] = [];
   @Input() uri: string = '';
   @Input() rollNumber: string = '';
-
+  
+  
   value: any = 'default';
 
   schoolSubjects = {
@@ -90,7 +92,6 @@ export class SummariserComponent implements OnInit, OnChanges {
       'bahasa melayu',
     ],
   };
-
   strength: Object = {
     10: 'Exceptional',
     9: 'phenomenal',
@@ -100,16 +101,30 @@ export class SummariserComponent implements OnInit, OnChanges {
     other: 'persevering',
   };
 
+  certificateDetails: string[] = [this.certificate, this.rollNumber];
+
   // Summarised Report
   summaryReport: string[][] = [[]];
   project = 'default';
-  constructor(private _summarise: SummariserService) {}
+  constructor(
+    private _summariser: SummariserService,
+    private _pdfService: DownloadAsPdfService,
+    ) {}
   async ngOnInit() {
     // window.location.reload();
-    this.summaryReport = await this._summarise.process(this.subjects);
+    this.summaryReport = await this._summariser.summarise(this.subjects); 
+     let report =  await this._summariser.getSummary();
+    
+     for(let i= 0; i < report.length; i++){
+      for(let j=0; j < report[i].length; j++){
+        // for(let k=0; k < report[i][j].length; k++)
+            console.log(`Test ${report[i][j]}`);
+      }
+    }
+    // this._pdfService.generatePDF(this,this.summaryReport, this.certificateDetails);
   }
+  
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
-    this.project = 'newValue;';
   }
 
 }

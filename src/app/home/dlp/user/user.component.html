@@ -1,36 +1,53 @@
 <div id="user-detail" class="m-3">
   <div id="user-profile">
+    <label for="user-profile-image" class="custom-file-upload">
+      Upload Image
+    </label>
+    <!-- <input type="file" (change)="onFileSelected($event)">   -->
+    <input type="file" id="user-profile-image" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+    <img id="user-profile-image" [src]="imageUrl" alt="Uploaded Image" *ngIf="imageUrl"  alt="{{ user.name }}">
+
     <img
       id="user-profile-image"
       src="assets/images/tri-color-bg.png"
       alt="{{ user.name }}"
+      *ngIf="!imageUrl"
+      display ="none"
     />
   </div>
 
-  <div id="user-credentials" class="m-2">
+  <div id="user-credentials" class="">
     <!-- <p>{{welcomeMessage}}</p>> -->
-    <p>
-      <span class="user-field">Name</span
-      ><span class="user-attribute">{{ user.name }}</span>
+    <span class="samll text-break ml-2">(Doble-click to edit any field)</span>
+    <p (dblclick)="makeEditable('name')">
+      <span class="user-field">Name</span>
+      <input *ngIf="isEditing.name" class = "m-1 input-box user-attribute"  [(ngModel)]="name" (blur)="disableEditing('name')" (keyup.enter)="disableEditing('name')" placeholder="Enter your name">
+      <span *ngIf="!isEditing.name" class="user-attribute" >{{ name == ''? user.name : name }}</span> <span *ngIf="!isEditing.name" class="samll user-attribute"> (edit)</span>
     </p>
-    <p>
-      <span class="user-field">DoB</span
-      ><span class="user-attribute">{{ user.dob }}</span>
+    <p (dblclick)="makeEditable('dob')">
+      <span class="user-field">DoB</span>
+      <input *ngIf="isEditing.dob" class = "m-1 input-box user-attribute" [(ngModel)]="dob" (blur)="disableEditing('dob')" (keyup.enter)="disableEditing('dob')" placeholder="dd-mm-yyyy">
+      <span *ngIf="!isEditing.dob" class="user-attribute" >{{ dob == ''? user.dob : dob }}</span><span *ngIf="!isEditing.dob" class="samll"> (edit)</span>
     </p>
-    <p>
-      <span class="user-field">Mother Name</span
-      ><span class="user-attribute">{{ user.motherName }}</span>
+    <p (dblclick)="makeEditable('motherName')">
+      <span class="user-field">Mother Name</span>
+      <input *ngIf="isEditing.motherName" class = "m-1 input-box user-attribute" [(ngModel)]="motherName" (blur)="disableEditing('motherName')" (keyup.enter)="disableEditing('motherName')" placeholder="Enter yours mother Name">
+      <span *ngIf="!isEditing.motherName" class="user-attribute" >{{ motherName == ''? user.motherName : motherName }}</span><span *ngIf="!isEditing.motherName" class="samll"> (edit)</span>
     </p>
-    <p>
-      <span class="user-field">Son/Wife/Daughter of</span
-      ><span class="user-attribute">{{ user.fatherName }}</span>
+    <p (dblclick)="makeEditable('fatherName')">
+      <span class="user-field">Son/Wife/Daughter of</span>
+      <input *ngIf="isEditing.fatherName" class = "m-1 input-box user-attribute" [(ngModel)]="fatherName" (blur)="disableEditing('fatherName')" (keyup.enter)="disableEditing('fatherName')" placeholder="Enter yours father name">
+      <span *ngIf="!isEditing.fatherName" class="user-attribute" >{{ fatherName == ''? user.fatherName : fatherName }}</span><span *ngIf="!isEditing.fatherName" class="samll"> (edit)</span>
     </p>
-    <p>
-      <span class="user-field">Gender</span
-      ><span class="user-attribute">{{ user.gender }}</span>
+    <p (dblclick)="makeEditable('gender')">
+      <span class="user-field">Gender</span>
+      <input *ngIf="isEditing.gender" class = "m-1 input-box user-attribute" [(ngModel)]="gender" (blur)="disableEditing('gender')" (keyup.enter)="disableEditing('gender')" placeholder="Male/ Female/ Other">
+      <span *ngIf="!isEditing.gender" class="user-attribute" >{{ gender == ''? user.gender : gender }}</span><span *ngIf="!isEditing.gender" class="samll"> (edit)</span>
     </p>
-    <!-- <p><span>Age</span>{{ age }}</p> -->
-    <!-- <p *ngIf="aadhar != ''"><span>Aadhar</span>{{ aadhar }}</p> -->
+
+    <!-- <p><span>Age</span>{{ age }}</p> 
+         <p *ngIf="aadhar != ''"><span>Aadhar</span>{{ aadhar }}</p> -->
+
   </div>
 
   <!-- QR-Code -->

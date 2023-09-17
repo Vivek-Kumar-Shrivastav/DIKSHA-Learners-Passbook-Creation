@@ -11,6 +11,11 @@ h1{
 h2{
     font-size: 1.5rem;
 }
+span{
+    display: inline-block;
+    box-sizing: border-box;
+    margin-right: 15px;
+}
 #user-detail{
     display: flex;
     width: 100;
@@ -25,8 +30,26 @@ h2{
     min-width : 15rem;
     /* margin-right: 1rem; */
 }
+p{ 
+    /* background: green; */
+    margin-bottom: 5px;
+    width: 60vw;
+    min-width : 30vw;
+    max-width : 90vw;
+    
+}
 .user-attributre{
+    cursor: pointer;
     word-wrap: break-word;
+}
+#user-profile{
+  width : 150px;
+  /* max-width: 170px; */
+  height: 200px;
+  max-height: 250px; 
+  /* padding: .5rem; */
+  margin: .25rem;
+  display: inline-block;
 }
 #user-profile-image{
   width : 133px;
@@ -36,6 +59,20 @@ h2{
   padding: .25rem;
   border: 1px solid rgb(172, 184, 211);
 }
+
+.custom-file-upload {
+    border: 2px solid #1471f4;
+    display: inline-block;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #1996fc;
+    color: #fff;
+    border-radius: 4px;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: #0056b3;
+  }
 
 #user-credentials{
     padding: .5rem;
@@ -48,9 +85,29 @@ h2{
     min-width: 60px;
     max-width: 150px;
 }
+.input-box {
+    width: 300px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none; 
+}
 
+/* Styling for the input box on focus */
+.input-box:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px #007bff80; /* Add a subtle box shadow on focus */
+}
 @media (max-width: 810px) {
     .user-field{
         display: block;
+    }
+}
+
+@media (max-width : 480px) {
+    .p{
+        box-sizing: border-box;
+        width : 80vw;
     }
 }
