@@ -1,0 +1,11 @@
+<div class="d-flex flex-column align-items-center justify-content-center"> 
+    <ol>
+        <ng-container *ngFor = "let file of fileIndexUri   ">
+            <li class = "m-1 ">
+                <label for ="label-checkbox" id="label-name">{{ file.name }} </label>
+                <input type="checkbox"  class="label-checkbox m-1 p-1" [value]="file.index" (change) = "toggleSelection(file.index)"> 
+            </li>
+        </ng-container>
+    </ol>
+    <button class = "btn btn-info m-auto" (click)="generateNewDlp()">Generate New DLP</button>
+</div>

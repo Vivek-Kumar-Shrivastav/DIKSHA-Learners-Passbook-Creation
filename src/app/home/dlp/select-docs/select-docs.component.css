@@ -1,0 +1,15 @@
+#label-name{
+    min-width: 200px;
+    display: inline-block;
+}
+.label-checkbox{
+     cursor: pointer;
+     width: 2rem;
+     padding: 1rem;
+}
+label{
+    font-weight: bold;
+}
+input[type ="checkbox"]:checked ~ label {
+    font-weight: 200;
+}
