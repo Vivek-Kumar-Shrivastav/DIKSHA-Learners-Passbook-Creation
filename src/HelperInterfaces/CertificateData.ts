@@ -5,7 +5,7 @@ export  interface Subject{
     gp : string;
 }
 // performance  => cgpa !=  blank => use gp; => else : use "%". 
-export  interface Certificate{  // can be renamed to Certificate
+export interface Certificate{  // can be renamed to Certificate
     subjects : Subject[];
     uri : string; 
     certificateOf : string;

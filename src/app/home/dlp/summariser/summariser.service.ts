@@ -108,10 +108,10 @@ export class SummariserService {
 
   // Generates & returns the summary 
   async summarise(subjects: Subject[]) : Promise<Array<Array<string>>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
       let category: number = 0;
       for (let subjectCategory in this.schoolSubjects) {
-        
+
         // subjectsPerformance is an array of subjectsPerformanceCard
         let subjectsPerformance: SubjectPerformanceCard[] = [];
         let categoryPerformance: CategoryPerformanceCard = {
@@ -119,9 +119,8 @@ export class SummariserService {
           max: 0,
           strength: 'persevering',
         };
-  
+
         let categoryReport: PerformanceCard = { subjectsPerformanceCard: subjectsPerformance, categoryPerformanceCard: categoryPerformance };
-  
         for (let subject of this.schoolSubjects[subjectCategory]) {
           for (let currentSubject of subjects) {
             let name: string = currentSubject.name;
@@ -172,7 +171,8 @@ export class SummariserService {
         }
       }
       // return this.summaryReport;
-      this.ReportCard.push(this.summaryReport);
+      // this.ReportCard.push(this.summaryReport);
+      console.log(`Summay service : ${this.summaryReport}`);
       resolve(this.summaryReport);
     })
   }

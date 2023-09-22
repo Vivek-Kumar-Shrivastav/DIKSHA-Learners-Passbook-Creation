@@ -1,4 +1,4 @@
-import { Injectable, resolveForwardRef } from '@angular/core';
+import { getDebugNode, Injectable, resolveForwardRef } from '@angular/core';
 import { Credentials } from '../../HelperInterfaces/Credendials';
 
 @Injectable({
@@ -21,6 +21,11 @@ export class ExtractUserDetailService {
       user.name = name == null ? '' : name;
     }
 
+    // if(this.certificate.certificate == "HSCER"){}
+    if (user.dob == '') {
+      let dob = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('dob');
+      user.dob = dob == null ? '' : dob;
+    }
     if (user.fatherName == '') {
       let fatherName = xmlDoc
         .getElementsByTagName('Person')[0]
@@ -33,7 +38,6 @@ export class ExtractUserDetailService {
         ?.getAttribute('motherName');
       user.motherName = motherName == null ? '' : motherName;
     }
-
     if (user.gender == '') {
       let gender = xmlDoc
         .getElementsByTagName('Person')[0]
@@ -51,13 +55,27 @@ export class ExtractUserDetailService {
      
     }
 
-    // if(this.certificate.certificate == "HSCER"){}
-    if (user.dob == '') {
-      let dob = xmlDoc.getElementsByTagName('Person')[0]?.getAttribute('dob');
-      user.dob = dob == null ? '' : dob;
-    }
     this.user = user;
     return user;
+  }
+  setDetails(user : Credentials){
+      let {name, dob, fatherName, motherName, gender} = user;
+      if(name != ''){
+        this.user.name = name;
+      }
+      if(dob != ''){
+        this.user.dob = dob;
+      }
+      if(fatherName != ''){
+        this.user.fatherName = fatherName;
+      }
+      if(motherName != ''){
+        this.user.motherName = motherName;
+      }
+      if(gender != ''){
+        this.user.gender = gender;
+      }
+      return this.user;
   }
   
   getDetails() : Promise<Credentials>{

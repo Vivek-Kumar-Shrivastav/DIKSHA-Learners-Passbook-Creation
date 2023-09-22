@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   
-    const auth = await axios.get(
+    const authentication = await axios.get(
         "https://digilocker.meripehchaan.gov.in/public/oauth2/1/authorize",
         {
           params:
@@ -22,10 +22,9 @@ router.get("/", async (req, res) => {
         }
       );
 
-      const url = auth.request.res.responseUrl;
-      // console.log(auth.request.res.responseUrl);
+      const url = authentication.request.res.responseUrl;
       console.log("Fetched Url");
-      // console.log(url);
+      console.log(`URL ; ${url}`);
       res.json({url : url});
 });
 

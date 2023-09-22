@@ -11,6 +11,7 @@ import { FileSaverModule } from 'ngx-filesaver';
 import { SummariserComponent } from './summariser/summariser.component';
 import { SummariserService } from './summariser/summariser.service';
 import { SelectDocsComponent } from './select-docs/select-docs.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SelectDocsComponent } from './select-docs/select-docs.component';
     DlpComponent,
     SummariserComponent,
     SelectDocsComponent,
+    LoaderComponent,
   ],
   imports: [CommonModule, FormsModule, FileSaverModule],
   exports: [DlpComponent],

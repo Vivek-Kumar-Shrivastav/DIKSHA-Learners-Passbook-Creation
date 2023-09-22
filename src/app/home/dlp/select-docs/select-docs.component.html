@@ -1,11 +1,25 @@
 <div class="d-flex flex-column align-items-center justify-content-center"> 
-    <ol>
-        <ng-container *ngFor = "let file of fileIndexUri   ">
+    <ol *ngIf="isLoaded">
+        <div *ngFor= "let file of fileIndexUri; let index = index">
             <li class = "m-1 ">
-                <label for ="label-checkbox" id="label-name">{{ file.name }} </label>
-                <input type="checkbox"  class="label-checkbox m-1 p-1" [value]="file.index" (change) = "toggleSelection(file.index)"> 
+                <label for ="file.name">{{file.name }} </label>
+                <input type="checkbox" id= "file.name" class="label-checkbox m-1 p-1" [value]="file.index" (change) = "toggleSelection(file.index)"> 
             </li>
-        </ng-container>
+        </div>
+    </ol>
+
+    <ol *ngIf="!isLoaded">
+        <div *ngFor= "let file of files; let index = index">
+            <li class = "m-1">
+                <label for ="file.name">{{file.name }} </label>
+                <input type="checkbox" id= "file.name" class="label-checkbox m-1 p-1" [value]="index" (change) = "toggleSelection(index)"> 
+            </li>
+        </div>
     </ol>
     <button class = "btn btn-info m-auto" (click)="generateNewDlp()">Generate New DLP</button>
 </div>
+<!-- <div *ngFor="let file of files">
+    <label>
+      <input type="checkbox"  [value]="file.uri" (change) = "toggleSelection(file.uri)"> {{ file.name }}
+    </label>
+  </div> -->

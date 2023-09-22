@@ -8,7 +8,7 @@ import {
 import { Subject } from '../../../../HelperInterfaces/CertificateData';
 import { SummariserService } from './summariser.service';
 import { DownloadAsPdfService } from 'src/app/service/download-as-pdf.service';
-
+import { Certificate } from '../../../../HelperInterfaces/CertificateData';
 
 @Component({
   selector: 'app-summariser',
@@ -17,11 +17,11 @@ import { DownloadAsPdfService } from 'src/app/service/download-as-pdf.service';
   providers: [SummariserService],
 })
 export class SummariserComponent implements OnInit, OnChanges {
-  @Input() certificate: string = '';
+  // @Input() certificate :  Certificate  = {} as Certificate;
+  @Input() certificateOf: string = '';
   @Input() subjects: Subject[] = [];
   @Input() uri: string = '';
   @Input() rollNumber: string = '';
-  
   
   value: any = 'default';
 
@@ -101,19 +101,20 @@ export class SummariserComponent implements OnInit, OnChanges {
     other: 'persevering',
   };
 
-  certificateDetails: string[] = [this.certificate, this.rollNumber];
+  certificateDetails: string[] = [this.certificateOf, this.rollNumber];
 
   // Summarised Report
   summaryReport: string[][] = [[]];
   project = 'default';
   constructor(
-    private _summariser: SummariserService,
+    private _summariserService: SummariserService,
     private _pdfService: DownloadAsPdfService,
     ) {}
   async ngOnInit() {
     // window.location.reload();
-    this.summaryReport = await this._summariser.summarise(this.subjects); 
-     let report =  await this._summariser.getSummary();
+    this.summaryReport = await this._summariserService.summarise(this.subjects); 
+    console.log(`Summary :${this.summaryReport}`);
+     let report =  await this._summariserService.getSummary();
     
      for(let i= 0; i < report.length; i++){
       for(let j=0; j < report[i].length; j++){

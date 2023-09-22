@@ -15,7 +15,13 @@ interface file{
   providedIn: 'root'
 })
 export class DataBaseService {
-
+  user  : Credentials = {
+    name: '',
+    dob: '',
+    fatherName: '',
+    motherName: '',
+    gender: '',
+  };
   constructor(
     private _userDataService: UserDataService,
     private _extractUserDetail: ExtractUserDetailService,
@@ -75,7 +81,8 @@ export class DataBaseService {
       for (let fileNum = 0; fileNum < localStorage.length; fileNum++) {
         let file;
         try {
-          file = await JSON.parse(this._userDataService.getData(fileNum));
+          
+          file = await JSON.parse(this._userDataService.getData(fileNum) !);
   
           if ('no-data' in file) {
             continue;
@@ -85,11 +92,13 @@ export class DataBaseService {
           let name = file.name;
           let uri = file.uri;
           let newfile : file = {index : index, name : name, uri : uri };
+          console.log(`File in db : ${file.index}, ${file.name}, ${file.uri}`);
           indexUri.push(newfile);
           
         }
         catch(error){}
       }
+      console.log("Index & URI", indexUri);
        resolve(indexUri);
     })
   }

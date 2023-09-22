@@ -47,6 +47,7 @@ a {
 
 .menu li:hover {
   /* color: white; */
+  z-index: 10;
   cursor: pointer;
   font-size : 20px;
   /* background-color: rgba(157, 209, 248, 0.884); */

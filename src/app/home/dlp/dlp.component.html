@@ -1,6 +1,6 @@
 <button class="btn btn-primary m-2" (click)="generatePDF()">Download</button>
   <!-- <button class="btn btn-primary m-2" (click)="getUserData()"> Get data</button> -->
-<strong> Refresh the page after loading...</strong>
+
 <div id="dlp">
   <app-user [user]="user"></app-user>
   <div class = "components d-flex align-item-center justify-content-center m-2 p-2">
@@ -25,38 +25,35 @@
     <div class="d-flex justify-content-center bg-warning">
       <h3 *ngIf="showTable || showSummary" class="text-center align-item-baseline">Co-Curricular</h3>
     </div>
-
-    <!-- Child-1 -->
-    <ng-container *ngIf = "showDocs">
-      <app-select-docs (commandEvent)="showData($event)"></app-select-docs>
-    </ng-container>
-
-    <!-- Child-2 -->
-    <ng-container *ngIf = "showTable">
-      <ng-container *ngFor="let certificate of coCurricularActivities">
-        <app-co-curricular
-          [certificate]="certificate.certificateOf"
-          [uri]="certificate.uri"
-          [subjects]="certificate.subjects"
-          [rollNumber]="certificate.rollNumber"
-        >
-        </app-co-curricular>
+    
+      <!-- Child-1 -->
+      <ng-container *ngIf = "showDocs">
+        <app-select-docs *ngIf= "isLoaded" [isLoaded] = "isLoaded"   [files] = "[]" (commandEvent)="showData($event)"></app-select-docs>
+        <app-select-docs  *ngIf= "!isLoaded" [isLoaded] = "isLoaded" [files] = "files" (commandEvent) ="showData($event)"></app-select-docs>
       </ng-container>
-    </ng-container>
-
-    <!-- Child-3 -->
-    <ng-container *ngIf = "showSummary">
-      <ng-container *ngFor="let certificate of coCurricularActivities">
-        
-        <app-summariser
-          [certificate]="certificate.certificateOf"
-          [uri]="certificate.uri"
-          [subjects]="certificate.subjects"
-          [rollNumber]="certificate.rollNumber"
-        >
-        </app-summariser>
+      <!-- Child-2 -->
+      <ng-container *ngIf = "showTable">
+        <ng-container *ngFor="let certificate of coCurricularActivities">
+          <app-co-curricular
+            [certificate]="certificate.certificateOf"
+            [uri]="certificate.uri"
+            [subjects]="certificate.subjects"
+            [rollNumber]="certificate.rollNumber"
+          >
+          </app-co-curricular>
+        </ng-container>
       </ng-container>
-    </ng-container>
+      <!-- Child-3 -->
+      <ng-container *ngIf = "showSummary">
+        <ng-container *ngFor="let certificate of coCurricularActivities">
+          <app-summariser
+            [certificateOf]="certificate.certificateOf"
+            [uri]="certificate.uri"
+            [subjects]="certificate.subjects"
+            [rollNumber]="certificate.rollNumber"
+          ></app-summariser>
+        </ng-container>
+      </ng-container>
 
     <!-- <app-extra-curricular> </app-extra-curricular> -->
   </div>

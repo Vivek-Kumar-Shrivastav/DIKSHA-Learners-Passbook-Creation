@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
   const clientSecret = process.env.CLIENT_SECRET;
   const authCode = req.body.code;
   console.log("Authcode", authCode);
-  console.log(`Authcode: ${authCode}`);
+  
   const redirectUri = "http://localhost:4200/DLP";
   
   const codeVerifier = process.env.CODE_VERIFIER;

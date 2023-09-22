@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter, Output} from '@angular/core';
+import { compileNgModule } from '@angular/compiler';
+import { Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
 import { DataBaseService } from 'src/app/service/data-base.service';
-
+import { File } from 'src/HelperInterfaces/Files';
 interface file{
   index: number;
   name : string;
@@ -14,6 +15,8 @@ interface file{
 })
 
 export class SelectDocsComponent implements OnInit{
+  @Input() files : File[] = [];
+  @Input() isLoaded : boolean = false;
   @Output() commandEvent = new EventEmitter<number[]>();
   
    fileIndexUri : file[] = [];
@@ -23,6 +26,8 @@ export class SelectDocsComponent implements OnInit{
 
    async ngOnInit() { 
       this.fileIndexUri = await this._dataBaseService.getIndexAndUri();
+      console.log(`Files in select-docs : ${this.files}`);
+      // window.location.reload();
    }
 
    toggleSelection(index: number) {

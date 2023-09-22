@@ -99,7 +99,7 @@ p{
     border-color: #007bff; /* Change border color on focus */
     box-shadow: 0 0 5px #007bff80; /* Add a subtle box shadow on focus */
 }
-@media (max-width: 810px) {
+@media (max-width: 991px) {
     .user-field{
         display: block;
     }

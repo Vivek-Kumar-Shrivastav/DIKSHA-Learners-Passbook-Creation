@@ -18,14 +18,6 @@ export class DownloadAsPdfService {
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
     this.user =  {  name : "", dob : "", fatherName : "", motherName : "", gender : "" };
   }
-  
-  // this.user = {
-  //   name: '',
-  //   dob: '',
-  //   fatherName: '',
-  //   motherName: '',
-  //   gender: '',
-  // };
 
     private dataURL : string = '';
     private user : Credentials ;
@@ -54,7 +46,7 @@ export class DownloadAsPdfService {
             { text: this.user.name, fontSize: 16, alignment: 'center' },
             { 
               columns : contacts.
-              map((contact)=>({
+              map((contact) =>({
                   text : contact,
                   width : '*',
                   margin :[0,5]
@@ -118,7 +110,6 @@ export class DownloadAsPdfService {
       })
     }
 
-    
     generateContact(contacts : any){
       let contactList : any = [];
       return new Promise((resolve)=>{
@@ -154,8 +145,5 @@ export class DownloadAsPdfService {
         );
       const pdfDoc = pdfMake.createPdf(docDefinition);
       pdfDoc.download('my-document.pdf');
-    }
-    
-    
-  
+    } 
 }
