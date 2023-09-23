@@ -123,12 +123,7 @@ export class SummariserService {
   async summarise(certificate : string, rollNum : string , subjects: Subject[]): Promise<Array<Array<string>>> {
     return new Promise(async (resolve) => {
       let category: number = 0;
-      this.summaryReport[category++] = [
-        certificate,
-        '',
-        rollNum,
-        '',
-      ];
+
       // Add the 
       for (let subjectCategory in this.schoolSubjects) {
         // subjectsPerformance is an array of subjectsPerformanceCard
@@ -196,7 +191,14 @@ export class SummariserService {
       // this.ReportCard.push(this.summaryReport);
       console.log(`Summary service : ${this.summaryReport}`);
       let index = this.getIndex();
-      this._pdfService.academicCard[index] = this.summaryReport;
+      if(index ==0 ){
+        // First Certificate then clean the academic card so that it doesnot conatins any previous data
+        this._pdfService.academicCard = {};
+      }
+      this._pdfService.academicCard[index] = [ 
+        [ certificate, '', rollNum, ''],
+        ...this.summaryReport
+      ];
       resolve(this.summaryReport);
     });
   }

@@ -4,6 +4,7 @@ import { ExtractUserDetailService } from './extract-user-detail.service';
 import { UserDataService } from './user-data.service'
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { objectFromMap } from 'pdfjs-dist/types/src/shared/util';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({
@@ -16,7 +17,7 @@ export class DownloadAsPdfService {
   private user : Credentials ;
 
   constructor(
-    private _extractUserDetail: ExtractUserDetailService,
+    private _extractUserDetailService: ExtractUserDetailService,
     private _userDataService : UserDataService
   ) { 
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -25,6 +26,7 @@ export class DownloadAsPdfService {
   
     async getSummary() {
       return new Promise((resolve) =>{
+        console.log(`KEYS : ${Object.keys(this.academicCard)}`);
         for(let key in this.academicCard){
           console.log("Value");
           let tableBody : Array<any> = [];
@@ -185,7 +187,7 @@ export class DownloadAsPdfService {
     }
 
     async generatePDF() {
-      this.user =  await this._extractUserDetail.getDetails();
+      this.user =  await this._extractUserDetailService.getDetails();
       let contacts = await this.generateContact({
         "Gmail" : "viveksrivastav1998vns@gmail.com",
         "GitHub" : "https://github.com/Vivek-Kumar-Shrivastav",

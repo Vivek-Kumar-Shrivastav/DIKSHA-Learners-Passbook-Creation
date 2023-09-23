@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { Subject } from '../../../../HelperInterfaces/CertificateData';
 import { SummariserService } from './summariser.service';
 import { DownloadAsPdfService } from 'src/app/service/download-as-pdf.service';

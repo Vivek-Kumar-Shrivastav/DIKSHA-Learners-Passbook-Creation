@@ -22,11 +22,11 @@ export class SelectDocsComponent implements OnInit{
    fileIndexUri : file[] = [];
    selectedFiles : number[] = [];
    constructor(private _dataBaseService : DataBaseService){}
-   
 
    async ngOnInit() { 
       this.fileIndexUri = await this._dataBaseService.getIndexAndUri();
       console.log(`Files in select-docs : ${this.files}`);
+      localStorage.removeItem("academicRecord");
       // window.location.reload();
    }
 
