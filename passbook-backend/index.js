@@ -15,7 +15,6 @@ const PORT = "5000";
 app.use(bodyParser.json());
 app.use(cors());
 
-// const port2 = "4200";
 
 var whitelist = ['http://localhost:4200']
 var corsOptions = {

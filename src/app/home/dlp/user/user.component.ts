@@ -1,4 +1,5 @@
 import { Component, Input, ModuleWithComponentFactories } from '@angular/core';
+import { UserDataService } from 'src/app/service/user-data.service';
 import { Credentials } from 'src/HelperInterfaces/Credendials';
 
 @Component({
@@ -14,8 +15,9 @@ export class UserComponent {
   fatherName : string = this.user.fatherName;
   motherName : string = this.user.motherName;
   gender : string = this.user.gender;
-  imageUrl : string = ''; 
-
+  imageUrl : string = this._userDataService.imageUrl; 
+  
+  constructor(private _userDataService : UserDataService){}
   onFileSelected(event: any): void {
     const file = event.target.files[0];
 
@@ -23,6 +25,7 @@ export class UserComponent {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imageUrl = e.target.result;
+        this._userDataService.imageUrl = this.imageUrl;
       };
       reader.readAsDataURL(file);
     }

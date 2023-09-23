@@ -16,7 +16,7 @@ import { File } from 'src/HelperInterfaces/Files';
   templateUrl: './dlp.component.html',
   styleUrls: ['./dlp.component.css'],
 })
-export class DlpComponent implements OnInit, OnDestroy {
+export class DlpComponent implements OnInit {
   // data : Observable<string> ;
   private token: string = '';
   data: Array<string> = [];
@@ -62,18 +62,22 @@ export class DlpComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     const url = window.location.href;
     const param = new URLSearchParams(url?.split('?')[1]);
-
+      
     //Extracting-Auth-Code
     this.code = param.get('code') !== null ? param.get('code')! : '';
-    if (this.code !== '' ) {    // code is there in paramaters of URL O
-      // console.log('Got the code in dlp', this.code);
-
-      this.token = await this._dlpService.getToken(this.code);
-      // console.log('Got the token in dlp', this.token);
-    
-      if(this.token !== ""){                 // If token received 
-        this._dlpService.getDetails(this.token);
-        this.files =  await this._dlpService.getFiles(this.token);
+    if (!this.isSessionStarted())
+    {
+      if (this.code !== '' ) {    // code is there in paramaters of URL O
+        // console.log('Got the code in dlp', this.code);
+        localStorage.setItem('first_session', 'true');
+        this.token = await this._dlpService.getToken(this.code);
+        // console.log('Got the token in dlp', this.token);
+      
+        if(this.token !== ""){                 // If token received 
+          this._dlpService.getDetails(this.token);
+          this.files =  await this._dlpService.getFiles(this.token);
+          // this.isLoaded= true;
+        }
       }
     }
     else{
@@ -82,14 +86,15 @@ export class DlpComponent implements OnInit, OnDestroy {
     }
    }
 
-  ngOnDestroy(): void {}
+   isSessionStarted() {
+    return localStorage.getItem('first_session') === 'true';
+  }
 
   async showData(indices : number[]){
-
-    this.coCurricularActivities = [];    // Reset the array of co-curricular activities
+    this.coCurricularActivities = [];     // Reset the array of co-curricular activities
     await this._dataBaseService.getDataFromLocalStorage( this.user, this.coCurricularActivities,indices);
-    this.docsSelected= true;
-    console.log(`From DLP USER : ${this.user.name}`)
+    this.docsSelected = true;
+    console.log(`From DLP USER : ${this.user.name}`);
   }
  
   onClick(event : string) {

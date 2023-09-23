@@ -16,7 +16,7 @@ import { Certificate } from '../../../../HelperInterfaces/CertificateData';
   styleUrls: ['./summariser.component.css'],
   providers: [SummariserService],
 })
-export class SummariserComponent implements OnInit, OnChanges {
+export class SummariserComponent implements OnInit {
   // @Input() certificate :  Certificate  = {} as Certificate;
   @Input() certificateOf: string = '';
   @Input() subjects: Subject[] = [];
@@ -26,10 +26,10 @@ export class SummariserComponent implements OnInit, OnChanges {
   value: any = 'default';
 
   schoolSubjects = {
-    math: ['math'],
-    science: ['science', 'bio', 'chemi', 'physic', 'science'],
-    commerce: ['accountancy', 'business', 'economics'],
-    social_science: [
+    Math: ['math'],
+    Science: ['science', 'bio', 'chemi', 'physic', 'science'],
+    Commerce: ['accountancy', 'business', 'economics'],
+    Social_Science: [
       'social',
       'history',
       'geography',
@@ -37,7 +37,7 @@ export class SummariserComponent implements OnInit, OnChanges {
       'economic',
       'polit',
     ],
-    skill_subject: [
+    Skill_Subjects: [
       'information',
       'legal',
       'fashion',
@@ -49,7 +49,7 @@ export class SummariserComponent implements OnInit, OnChanges {
       'yoga',
       'sangeet',
     ],
-    language: [
+    Language: [
       'english',
       'hindi',
       'gujrati',
@@ -94,14 +94,12 @@ export class SummariserComponent implements OnInit, OnChanges {
   };
   strength: Object = {
     10: 'Exceptional',
-    9: 'phenomenal',
-    8: 'excellent',
-    7: 'good',
-    6: 'hardWorking',
-    other: 'persevering',
+    9: 'Phenomenal',
+    8: 'Excellent',
+    7: 'Good',
+    6: 'HardWorking',
+    other: 'Persevering',
   };
-
-  certificateDetails: string[] = [this.certificateOf, this.rollNumber];
 
   // Summarised Report
   summaryReport: string[][] = [[]];
@@ -112,20 +110,12 @@ export class SummariserComponent implements OnInit, OnChanges {
     ) {}
   async ngOnInit() {
     // window.location.reload();
-    this.summaryReport = await this._summariserService.summarise(this.subjects); 
+    this.summaryReport = await this._summariserService.summarise(this.certificateOf, this.rollNumber, this.subjects); 
+  
     console.log(`Summary :${this.summaryReport}`);
-     let report =  await this._summariserService.getSummary();
-    
-     for(let i= 0; i < report.length; i++){
-      for(let j=0; j < report[i].length; j++){
-        // for(let k=0; k < report[i][j].length; k++)
-            console.log(`Test ${report[i][j]}`);
-      }
-    }
-    // this._pdfService.generatePDF(this,this.summaryReport, this.certificateDetails);
+  
   }
   
-  async ngOnChanges(changes: SimpleChanges): Promise<void> {
-  }
+
 
 }

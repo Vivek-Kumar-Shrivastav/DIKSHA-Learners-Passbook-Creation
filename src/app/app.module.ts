@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 
 import { AuthModule } from './auth/auth.module';
 import { DLPModule } from './home/dlp/dlp.module';
-import { DlpComponent } from './home/dlp/dlp.component';
 import { HomeComponent } from './home/home.component';
 import { UserDataService } from './service/user-data.service';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';

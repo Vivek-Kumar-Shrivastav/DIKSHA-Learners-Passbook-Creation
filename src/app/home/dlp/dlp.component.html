@@ -26,12 +26,12 @@
       <h3 *ngIf="showTable || showSummary" class="text-center align-item-baseline">Co-Curricular</h3>
     </div>
     
-      <!-- Child-1 -->
+      <!-- Child-1 : For Selecting the documnets -->
       <ng-container *ngIf = "showDocs">
-        <app-select-docs *ngIf= "isLoaded" [isLoaded] = "isLoaded"   [files] = "[]" (commandEvent)="showData($event)"></app-select-docs>
+        <app-select-docs *ngIf= "isLoaded" [isLoaded] = "isLoaded"   [files] = "[]" (commandEvent)= "showData($event)"></app-select-docs>
         <app-select-docs  *ngIf= "!isLoaded" [isLoaded] = "isLoaded" [files] = "files" (commandEvent) ="showData($event)"></app-select-docs>
       </ng-container>
-      <!-- Child-2 -->
+      <!-- Child-2 : For Showing the actual result-->
       <ng-container *ngIf = "showTable">
         <ng-container *ngFor="let certificate of coCurricularActivities">
           <app-co-curricular
@@ -43,7 +43,7 @@
           </app-co-curricular>
         </ng-container>
       </ng-container>
-      <!-- Child-3 -->
+      <!-- Child-3 : For Showing the summarised result-->
       <ng-container *ngIf = "showSummary">
         <ng-container *ngFor="let certificate of coCurricularActivities">
           <app-summariser

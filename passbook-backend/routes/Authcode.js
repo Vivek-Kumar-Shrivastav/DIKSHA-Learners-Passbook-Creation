@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   
+  try{
     const authentication = await axios.get(
         "https://digilocker.meripehchaan.gov.in/public/oauth2/1/authorize",
         {
@@ -26,6 +27,10 @@ router.get("/", async (req, res) => {
       console.log("Fetched Url");
       console.log(`URL ; ${url}`);
       res.json({url : url});
+    }
+    catch (error){
+      console.log("Error in getting code");
+    }
 });
 
 export default router;

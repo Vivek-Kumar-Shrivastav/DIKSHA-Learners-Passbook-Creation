@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
       res.json(response.data);
     })
     .catch((error) => {
-      console.error("Error in accessing Token:", error.response.data);
+      console.error("Error in accessing Token:", error);
     });
 
   });

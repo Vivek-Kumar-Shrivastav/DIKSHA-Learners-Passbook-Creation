@@ -1,6 +1,6 @@
 import { Component , OnInit, OnDestroy} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetAuthorisatonService } from '../service/get-authorisaton.service';
+import { AuthorisatonService } from '../service/get-authorisaton.service';
 import { UserDataService } from '../service/user-data.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   flag = false;
 
   constructor(
-    private _authorize: GetAuthorisatonService,
+    private _authorizeService: AuthorisatonService,
     private http: HttpClient,
     private _userDataService: UserDataService,
   ) {}
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getAuthCode() {
     console.log("auth code generation");
     const url = 'http://localhost:5000/api/authorise';
-    this._authorize.getAuthcode(url).subscribe(async (response) => {
+    this._authorizeService.getAuthcode(url).subscribe(async (response) => {
       // console.log(response);
      window.location.replace(response.url);
   })
