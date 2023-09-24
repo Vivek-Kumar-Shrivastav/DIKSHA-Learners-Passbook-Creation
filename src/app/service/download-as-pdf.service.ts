@@ -3,6 +3,7 @@ import { Credentials } from '../../HelperInterfaces/Credendials';
 import { CredentialsService } from './user-credentials.service';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { IdentitySetService } from './identity-set.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({
@@ -14,7 +15,10 @@ export class DownloadAsPdfService {
   academicCard: object = {}; // In Angular, services are typically singletons i.e. they are created once and shared across application
   private user: Credentials;
 
-  constructor(private _userCredentilasService: CredentialsService) {
+  constructor(
+    private _userCredentilasService: CredentialsService,
+    private _userIdentitySetService : IdentitySetService
+    ) {
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
     this.user = {
       name: '',
@@ -212,6 +216,7 @@ export class DownloadAsPdfService {
     });
 
     //Get the URL of uploaded user image
+    this.user =  await this._userIdentitySetService.getDetails();
     let URL = this._userCredentilasService.imageUrl;
     if (URL !== '') {
       this.dataURL = URL;
