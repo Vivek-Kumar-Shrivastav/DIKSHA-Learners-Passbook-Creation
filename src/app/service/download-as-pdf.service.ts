@@ -76,14 +76,14 @@ export class DownloadAsPdfService {
       return new Promise(async (resolve) =>{
          this.docDefinition = {
           content: [
-            { text: this.user.name, fontSize: 16, alignment: 'center' },
-            { 
-              columns : contacts.map((contact) =>({
-                  text : contact,
-                  width : '*',
-                  margin :[0,5]
-              }))
-            },
+            { text: this.user.name, fontSize: 16, margin :[0,5], alignment: 'center' },
+            // { 
+            //   columns : contacts.map((contact) =>({
+            //       text : contact,
+            //       width : '*',
+            //       margin :[0,5]
+            //   }))
+            // },
 
             {
               table : {
