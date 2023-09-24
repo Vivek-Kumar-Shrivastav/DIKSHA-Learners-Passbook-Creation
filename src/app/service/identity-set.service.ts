@@ -4,7 +4,7 @@ import { Credentials } from '../../HelperInterfaces/Credendials';
 @Injectable({
   providedIn: 'root',
 })
-export class ExtractUserDetailService {
+export class IdentitySetService {
   private user: Credentials;
   constructor() {
     this.user = {

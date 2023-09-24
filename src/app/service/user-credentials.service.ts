@@ -4,7 +4,7 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserDataService {
+export class CredentialsService {
   // private dataSubject  =  new ReplaySubject<string>(1);
   // public data$ = this.dataSubject.asObservable();
   private data$ = '';

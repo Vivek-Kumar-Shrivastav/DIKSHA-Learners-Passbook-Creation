@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ExtractUserDetailService } from './extract-user-detail.service';
+import { ExtractUserDetailService } from './identity-set.service';
 
 describe('ExtractUserDetailService', () => {
   let service: ExtractUserDetailService;
